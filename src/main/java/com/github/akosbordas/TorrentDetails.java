@@ -9,9 +9,8 @@ import java.util.Date;
 
 public abstract class TorrentDetails {
 
-    //adattagok
     private Date uploadDate;
-    private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private String uploader;
     private String commentCount;
@@ -32,7 +31,7 @@ public abstract class TorrentDetails {
         Document document = parseHtml(html);
 
         try {
-            uploadDate = format.parse(extractGenericInfoColumn(1, 4, document));
+            uploadDate = DATE_FORMAT.parse(extractGenericInfoColumn(1, 4, document));
             uploader = extractGenericInfoColumn(1, 6, document);
             commentCount = extractGenericInfoColumn(1, 8, document);
 
@@ -53,11 +52,11 @@ public abstract class TorrentDetails {
         return this;
     }
 
-    public static String extractGenericInfoColumn(int column, int child, Document document) {
+    protected static String extractGenericInfoColumn(int column, int child, Document document) {
         return document.select("div.torrent_reszletek > div.torrent_col" + column + " div:nth-child(" + child + ")").text();
     }
 
-    public static String extractTypeSpecificInfoByName(Document document, String details) {
+    protected static String extractTypeSpecificInfoByName(Document document, String details) {
         return document.select("div.torrent_leiras td:contains(" + details + "):first-child~td").text();
     }
 
@@ -128,14 +127,6 @@ public abstract class TorrentDetails {
 
     public void setUploadDate(Date uploadDate) {
         this.uploadDate = uploadDate;
-    }
-
-    public DateFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(DateFormat format) {
-        this.format = format;
     }
 
     public String getUploader() {
