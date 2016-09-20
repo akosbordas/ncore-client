@@ -18,6 +18,50 @@ public class MovieTorrentDetails extends TorrentDetails {
     private String mafabURL;
 
 
+    public String getInfobarTitle() {
+        return infobar_title;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public String getImdbRating() {
+        return imdbRating;
+    }
+
+    public String getImdbURL() {
+        return imdbURL;
+    }
+
+    public String getOtherURL() {
+        return otherURL;
+    }
+
+    public String getMafabURL() {
+        return mafabURL;
+    }
+
     public void customParse(Document document) {
 
         infobar_title = document.select("div.infobar_title").text();

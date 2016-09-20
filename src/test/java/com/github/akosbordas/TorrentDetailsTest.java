@@ -27,16 +27,16 @@ public class TorrentDetailsTest {
     public void shouldPassIfParsedAllFields() throws Exception {
         String html = readHtml("torrent-details-parse-success.html");
         torrentDetails.parse(html);
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("uploadDate", DATE_FORMAT.parse("2016-07-25 20:00:29"));
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("uploader", "Anonymous");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("commentCount", "2 db");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("seederCount", "66");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("leecherCount", "0");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("downloadCount", "++");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("speed", "387.98 KB/s (becsült)");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("size", "965.06 MB (1011940950 bájt)");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("fileCount", "2");
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("description", "Eredeti release! Inception.2010.iNTERNAL.BDRip.x264-REGRET Két ifjú és ambiciózus építész együtt dolgozik, s nem csak kollégák, hanem a legjobb barátok is, ám kapcsolatukra némi árnyék vetül. A vállalatnál kifejlesztettek egy olyan technológiát, amely segítségével be lehet lépni az álmokba, és bizonyos emberek fejéből így információhoz lehet jutni. Amikor Cobb él ezzel a lehetőséggel, a dolgok egyre bonyolultabbakká válnak... Eredet (Inception) - Magyar Szinkronos Előzetes https://www.youtube.com/watch?v=Ypu8DP2ci-M");
+        assertThat(torrentDetails.getUploadDate()).isEqualTo(DATE_FORMAT.parse("2016-07-25 20:00:29"));
+        assertThat(torrentDetails.getUploader()).isEqualTo("Anonymous");
+        assertThat(torrentDetails.getCommentCount()).isEqualTo("2 db");
+        assertThat(torrentDetails.getSeederCount()).isEqualTo("66");
+        assertThat(torrentDetails.getLeecherCount()).isEqualTo("0");
+        assertThat(torrentDetails.getDownloadCount()).isEqualTo("++");
+        assertThat(torrentDetails.getSpeed()).isEqualTo("387.98 KB/s (becsült)");
+        assertThat(torrentDetails.getSize()).isEqualTo("965.06 MB (1011940950 bájt)");
+        assertThat(torrentDetails.getFileCount()).isEqualTo("2");
+        assertThat(torrentDetails.getDescription()).isEqualTo("Eredeti release! Inception.2010.iNTERNAL.BDRip.x264-REGRET Két ifjú és ambiciózus építész együtt dolgozik, s nem csak kollégák, hanem a legjobb barátok is, ám kapcsolatukra némi árnyék vetül. A vállalatnál kifejlesztettek egy olyan technológiát, amely segítségével be lehet lépni az álmokba, és bizonyos emberek fejéből így információhoz lehet jutni. Amikor Cobb él ezzel a lehetőséggel, a dolgok egyre bonyolultabbakká válnak... Eredet (Inception) - Magyar Szinkronos Előzetes https://www.youtube.com/watch?v=Ypu8DP2ci-M");
 
     }
 
@@ -44,7 +44,7 @@ public class TorrentDetailsTest {
     public void shouldPassIfParsedEmptyStringFromClassWithoutValue() throws IOException {
         String html = readHtml("torrent-details-parse-empty-string.html");
         torrentDetails.parse(html);
-        assertThat(torrentDetails).hasFieldOrPropertyWithValue("commentCount", "");
+        assertThat(torrentDetails.getCommentCount()).isEqualTo("");
 
     }
 
@@ -200,16 +200,16 @@ public class TorrentDetailsTest {
 
         MovieTorrentDetails movieTorrentDetails = new MovieTorrentDetails();
         movieTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("movie-custom-torrent-details.html")));
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("infobar_title", "Moby Dick");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("releaseDate", "1998");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("director", "Franc Roddam");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("actors", "Henry Thomas, Bruce Spence, Hugh Keays-Byrne, Robin Cuming, Shane Connor");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("country", "UK, Ausztrália, USA");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("length", "180 perc");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("tags", "kaland, dráma, thriller");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("imdbRating", "6.5");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("imdbURL", "http://hungarian.imdb.com/title/tt0120756");
-        assertThat(movieTorrentDetails).hasFieldOrPropertyWithValue("mafabURL", "http://www.mafab.hu/movies/mob...");
+        assertThat(movieTorrentDetails.getInfobarTitle()).isEqualTo("Moby Dick");
+        assertThat(movieTorrentDetails.getReleaseDate()).isEqualTo("1998");
+        assertThat(movieTorrentDetails.getDirector()).isEqualTo("Franc Roddam");
+        assertThat(movieTorrentDetails.getActors()).isEqualTo("Henry Thomas, Bruce Spence, Hugh Keays-Byrne, Robin Cuming, Shane Connor");
+        assertThat(movieTorrentDetails.getCountry()).isEqualTo("UK, Ausztrália, USA");
+        assertThat(movieTorrentDetails.getLength()).isEqualTo("180 perc");
+        assertThat(movieTorrentDetails.getTags()).isEqualTo("kaland, dráma, thriller");
+        assertThat(movieTorrentDetails.getImdbRating()).isEqualTo("6.5");
+        assertThat(movieTorrentDetails.getImdbURL()).isEqualTo("http://hungarian.imdb.com/title/tt0120756");
+        assertThat(movieTorrentDetails.getMafabURL()).isEqualTo("http://www.mafab.hu/movies/mob...");
 
     }
 
@@ -219,7 +219,7 @@ public class TorrentDetailsTest {
     public void shouldParseMusicCustomTorrentDetails() throws IOException {
         MusicTorrentDetails musicTorrentDetails = new MusicTorrentDetails();
         musicTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("music-custom-torrent-details.html")));
-        assertThat(musicTorrentDetails).hasFieldOrPropertyWithValue("tags", "audiobook");
+        assertThat(musicTorrentDetails.getTags()).isEqualTo("audiobook");
 
     }
 
@@ -227,7 +227,7 @@ public class TorrentDetailsTest {
     public void shouldParseEbookCustomTorrentDetails() throws IOException {
         EbookTorrentDetails ebookTorrentDetails = new EbookTorrentDetails();
         ebookTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("ebook-custom-torrent-details.html")));
-        assertThat(ebookTorrentDetails).hasFieldOrPropertyWithValue("tags", "sport");
+        assertThat(ebookTorrentDetails.getTags()).isEqualTo("sport");
 
     }
 

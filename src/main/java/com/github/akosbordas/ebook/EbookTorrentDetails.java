@@ -5,6 +5,10 @@ import org.jsoup.nodes.Document;
 
 public class EbookTorrentDetails extends TorrentDetails {
 
+    public String getTags() {
+        return tags;
+    }
+
     private String tags;
 
     @Override

@@ -5,6 +5,10 @@ import org.jsoup.nodes.Document;
 
 public class MusicTorrentDetails extends TorrentDetails {
 
+    public String getTags() {
+        return tags;
+    }
+
     private String tags;
 
     public void customParse(Document document) {
