@@ -1,6 +1,8 @@
 package com.github.akosbordas;
 
 import com.github.akosbordas.authentication.LoginService;
+import com.github.akosbordas.search.SearchCriterion;
+import com.github.akosbordas.search.TextSearchCriterion;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -17,6 +19,7 @@ import org.jsoup.nodes.Element;
 import java.io.*;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import static com.github.akosbordas.authentication.CredentialsProvider.setPassword;
 import static com.github.akosbordas.authentication.CredentialsProvider.setUsername;
@@ -29,7 +32,10 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
     private LoginService loginService = getLoginServiceInstance();
 
     public List<TorrentListElement> search(String term) throws IOException {
+        return search(newArrayList(new TextSearchCriterion(term)));
+    }
 
+    private List<TorrentListElement> search(List<SearchCriterion> criteria) throws IOException {
         loginService.login();
 
         List<TorrentListElement> searchResults = newArrayList();
@@ -40,7 +46,14 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         List<NameValuePair> searchFromList = newArrayList();
 
-        searchFromList.add(new BasicNameValuePair("mire", term));
+        for (SearchCriterion searchCriterion : criteria) {
+            Map<String, String> searchProperties = searchCriterion.getSearchProperties();
+            for (String searchKey : searchProperties.keySet()) {
+                searchFromList.add(new BasicNameValuePair(searchKey, searchProperties.get(searchKey)));
+            }
+        }
+
+        // TODO remove unnecessary parts when this method is finalized
         searchFromList.add(new BasicNameValuePair("miben", "name"));
         searchFromList.add(new BasicNameValuePair("tipus", "all_own"));
         searchFromList.add(new BasicNameValuePair("submit.x", "0"));
@@ -63,7 +76,16 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
         }
 
         return searchResults;
+    }
 
+    @Override
+    public List<TorrentListElement> search(String term, SearchCriterion... criteria) throws IOException {
+        return null;
+    }
+
+    @Override
+    public List<TorrentListElement> search(String term, List<SearchCriterion> criteria) throws IOException {
+        return null;
     }
 
     public TorrentDetails getTorrentDetails(String torrentId) throws IOException {
