@@ -139,7 +139,7 @@ public enum TorrentType {
     }
 
     public String getSearchKeyForType() {
-        return "tipus";
+        return "kivalasztott_tipus[]";
     }
 
     public abstract String getSearchValue();

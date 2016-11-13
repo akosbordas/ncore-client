@@ -3,6 +3,7 @@ package com.github.akosbordas.ncore;
 import com.github.akosbordas.ncore.authentication.LoginService;
 import com.github.akosbordas.ncore.search.SearchCriterion;
 import com.github.akosbordas.ncore.search.TextSearchCriterion;
+import com.github.akosbordas.ncore.search.TorrentTypeCriterion;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -15,6 +16,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,16 +42,26 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         List<NameValuePair> searchFromList = newArrayList();
 
+        boolean torrentTypeFilterEnabled = false;
         for (SearchCriterion searchCriterion : criteria) {
+            if (!torrentTypeFilterEnabled && searchCriterion instanceof TorrentTypeCriterion) {
+                torrentTypeFilterEnabled = true;
+            }
+
             Map<String, String> searchProperties = searchCriterion.getSearchProperties();
             for (String searchKey : searchProperties.keySet()) {
                 searchFromList.add(new BasicNameValuePair(searchKey, searchProperties.get(searchKey)));
             }
         }
 
+        if (torrentTypeFilterEnabled) {
+            searchFromList.add(new BasicNameValuePair("tipus", "kivalasztottak_kozott"));
+        } else {
+            searchFromList.add(new BasicNameValuePair("type", "all_own"));
+        }
+
         // TODO remove unnecessary parts when this method is finalized
         searchFromList.add(new BasicNameValuePair("miben", "name"));
-        searchFromList.add(new BasicNameValuePair("tipus", "all_own"));
         searchFromList.add(new BasicNameValuePair("submit.x", "0"));
         searchFromList.add(new BasicNameValuePair("submit.y", "0"));
         searchFromList.add(new BasicNameValuePair("submit", "Ok"));
@@ -74,18 +86,22 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
     @Override
     public List<TorrentListElement> search(String term, SearchCriterion... criteria) throws IOException {
-        return null;
+        return search(term, newArrayList(criteria));
     }
 
     @Override
     public List<TorrentListElement> search(String term, List<SearchCriterion> criteria) throws IOException {
-        return null;
+        if (criteria == null) {
+            criteria = newArrayList();
+        }
+
+        criteria.add(new TextSearchCriterion(term));
+        return search(criteria);
     }
 
     public TorrentDetails getTorrentDetails(String torrentId) throws IOException {
-
         if (torrentId == null) {
-            throw new NullPointerException("Search term cannot be null.");
+            throw new IllegalArgumentException("Torrent id cannot be null.");
         }
 
         loginService.login();
@@ -103,7 +119,6 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
     @Override
     public void download(String torrentId, String path) throws IOException {
-
         loginService.login();
         HttpGet httpGet = new HttpGet("https://ncore.cc/torrents.php?action=download&id=" + torrentId);
         HttpResponse response = HttpClientProvider.getHttpClient().execute(httpGet);

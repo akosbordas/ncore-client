@@ -75,7 +75,6 @@ public class LoginService extends ClientRequestBase {
             loginFormList.add(new BasicNameValuePair("submit", "Belépés!"));
             loginFormList.add(new BasicNameValuePair("pass", getPassword()));
 
-
             request.setEntity(new UrlEncodedFormEntity(loginFormList));
 
             HttpResponse response = getHttpClient().execute(request);
