@@ -35,7 +35,7 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
         return search(newArrayList(new TextSearchCriterion(term)));
     }
 
-    private List<TorrentListElement> search(List<SearchCriterion> criteria) throws IOException {
+    private List<TorrentListElement> search(List<? extends SearchCriterion> criteria) throws IOException {
         loginService.login();
 
         List<TorrentListElement> searchResults = newArrayList();
