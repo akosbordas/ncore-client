@@ -71,7 +71,9 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         HttpResponse response = HttpClientProvider.getHttpClient().execute(request);
 
-        Document resultPage = Jsoup.parse(response.getEntity().getContent(), "UTF-8", "https://ncore.cc/torrents.php");
+        InputStream contentStream = response.getEntity().getContent();
+        Document resultPage = Jsoup.parse(contentStream, "UTF-8", "https://ncore.cc/torrents.php");
+        contentStream.close();
 
         for (Element element : resultPage.select("div.torrent_txt > a")) {
 
@@ -114,7 +116,10 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         TorrentDetailsFactory torrentDetailsFactory = TorrentDetailsFactory.getFactoryInstance();
 
-        return torrentDetailsFactory.create(IOUtils.toString(response.getEntity().getContent()));
+        InputStream contentStream = response.getEntity().getContent();
+        TorrentDetails torrentDetails = torrentDetailsFactory.create(IOUtils.toString(contentStream));
+        contentStream.close();
+        return torrentDetails;
     }
 
     @Override
@@ -128,10 +133,11 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
             throw new RuntimeException("Couldn't get filename from header");
         }
 
-        IOUtils.copy(response.getEntity().getContent(), new FileOutputStream(
+        InputStream contentStream = response.getEntity().getContent();
+        IOUtils.copy(contentStream, new FileOutputStream(
                 new File(path + contentDispositionValues[1]))
         );
-
+        contentStream.close();
     }
 
 }

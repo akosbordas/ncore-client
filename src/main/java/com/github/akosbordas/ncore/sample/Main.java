@@ -30,8 +30,8 @@ public class Main {
         torrentDetails.getDescription();
         System.out.println(torrentDetails);
 
-//        client.download(torrentListElement.getId(), "c://tmp");
-//        System.out.println(torrentListElement.getName() + " is successfully downloaded.");
+        client.download(torrentListElement.getId(), "c:\\tmp\\");
+        System.out.println(torrentListElement.getName() + " is successfully downloaded.");
     }
 
 
