@@ -76,11 +76,8 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
         contentStream.close();
 
         for (Element element : resultPage.select("div.torrent_txt > a")) {
-
             TorrentListElement torrentElement = new TorrentListElement(element.attr("title"), element.attr("href"));
-
             searchResults.add(torrentElement);
-
         }
 
         return searchResults;

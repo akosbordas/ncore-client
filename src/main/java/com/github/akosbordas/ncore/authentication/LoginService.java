@@ -9,14 +9,15 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.List;
 
-import static com.github.akosbordas.ncore.authentication.CredentialsProvider.*;
 import static com.github.akosbordas.ncore.HttpClientProvider.getHttpClient;
+import static com.github.akosbordas.ncore.authentication.CredentialsProvider.getPassword;
+import static com.github.akosbordas.ncore.authentication.CredentialsProvider.getUsername;
 import static com.google.common.collect.Lists.newArrayList;
+import static org.apache.http.util.EntityUtils.consumeQuietly;
 
 public class LoginService extends ClientRequestBase {
 
@@ -48,7 +49,7 @@ public class LoginService extends ClientRequestBase {
         boolean notRedirectedToLoginPage = statusCode == 302 && locationHeader != null && !locationHeader.getValue().contains("login.php");
         boolean isOnLoginPage = statusCode == 200 && pageContainsLoginContainer;
 
-        EntityUtils.consumeQuietly(response.getEntity());
+        consumeQuietly(response.getEntity());
 
         return notRedirectedToLoginPage || !isOnLoginPage;
 
@@ -78,8 +79,13 @@ public class LoginService extends ClientRequestBase {
             request.setEntity(new UrlEncodedFormEntity(loginFormList));
 
             HttpResponse response = getHttpClient().execute(request);
+            Header location = response.getFirstHeader("location");
 
-            EntityUtils.consumeQuietly(response.getEntity());
+            if (location == null || location.getValue().contains("problema")) {
+                throw new RuntimeException("Failed to login to ncore.cc. Maybe wrong credentials?");
+            }
+
+            consumeQuietly(response.getEntity());
 
         }
 
