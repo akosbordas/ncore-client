@@ -9,6 +9,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +22,8 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.apache.http.util.EntityUtils.consumeQuietly;
 
 public class LoginService extends ClientRequestBase {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     private static final String TORRENTS_URL = "https://ncore.cc/torrents.php";
     private static final String LOGIN_URL = "https://ncore.cc/login.php";
@@ -35,7 +39,6 @@ public class LoginService extends ClientRequestBase {
 
     }
 
-
     public boolean isLoggedIn() throws IOException {
         HttpGet request = new HttpGet(TORRENTS_URL);
         HttpResponse response = getHttpClient().execute(request);
@@ -46,15 +49,16 @@ public class LoginService extends ClientRequestBase {
 
         boolean pageContainsLoginContainer = IOUtils.toString(response.getEntity().getContent()).contains("login_all");
 
-        boolean notRedirectedToLoginPage = statusCode == 302 && locationHeader != null && !locationHeader.getValue().contains("login.php");
+        boolean notRedirectedToLoginPage =
+            statusCode == 302 && locationHeader != null && !locationHeader.getValue().contains("login.php");
         boolean isOnLoginPage = statusCode == 200 && pageContainsLoginContainer;
 
         consumeQuietly(response.getEntity());
 
-        return notRedirectedToLoginPage || !isOnLoginPage;
-
+        boolean loggedIn = notRedirectedToLoginPage || !isOnLoginPage;
+        logger.debug("User was {} logged in previously", loggedIn ? "" : "not");
+        return loggedIn;
     }
-
 
     public void login() throws IOException {
 
@@ -63,10 +67,11 @@ public class LoginService extends ClientRequestBase {
         }
 
         if (!isLoggedIn()) {
+            logger.debug("User has to be logged in first.");
 
             HttpPost request = new HttpPost(LOGIN_URL);
             initBaseRequestHeaders(request);
-            request.setHeader("referer", "https://ncore.cc/login.php");
+            request.setHeader("referer", LOGIN_URL);
 
             List<NameValuePair> loginFormList = newArrayList();
 
@@ -78,8 +83,14 @@ public class LoginService extends ClientRequestBase {
 
             request.setEntity(new UrlEncodedFormEntity(loginFormList));
 
+            logger.debug("Login started with username [{}] and password [SECRET]", getUsername());
+
+            logger.debug("POST request execute is stared to [{}]", LOGIN_URL);
+
             HttpResponse response = getHttpClient().execute(request);
             Header location = response.getFirstHeader("location");
+
+            logger.debug("POST request is finished and redirects to [{}]", location);
 
             if (location == null || location.getValue().contains("problema")) {
                 throw new RuntimeException("Failed to login to ncore.cc. Maybe wrong credentials?");
@@ -87,6 +98,7 @@ public class LoginService extends ClientRequestBase {
 
             consumeQuietly(response.getEntity());
 
+            logger.debug("Login was successful");
         }
 
     }

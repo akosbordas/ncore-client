@@ -14,9 +14,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +29,12 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient {
 
+    private static final Logger logger = LoggerFactory.getLogger(DefaultNcoreClient.class);
+
+    public static final String TORRENT_DETAILS_PAGE_PREFIX = "https://ncore.cc/torrents.php?action=details&id=";
+    public static final String TORRENT_DOWNLOAD_PAGE_PREFIX = "https://ncore.cc/torrents.php?action=download&id=";
+    public static final String TORRENTS_PAGE_PREFIX = "https://ncore.cc/torrents.php";
+
     private LoginService loginService = getLoginServiceInstance();
 
     public List<TorrentListElement> search(String term) throws IOException {
@@ -32,13 +42,14 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
     }
 
     private List<TorrentListElement> search(List<? extends SearchCriterion> criteria) throws IOException {
+        logger.debug("Search started with the following criteria: [{}]", criteria);
         loginService.login();
 
         List<TorrentListElement> searchResults = newArrayList();
 
-        HttpPost request = new HttpPost("https://ncore.cc/torrents.php");
+        HttpPost request = new HttpPost(TORRENTS_PAGE_PREFIX);
         initBaseRequestHeaders(request);
-        request.setHeader("referer", "https://ncore.cc/torrents.php");
+        request.setHeader("referer", TORRENTS_PAGE_PREFIX);
 
         List<NameValuePair> searchFromList = newArrayList();
 
@@ -69,17 +80,23 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         request.setEntity(new UrlEncodedFormEntity(searchFromList));
 
+        logger.debug("POST request execute is stared to [{}]", TORRENTS_PAGE_PREFIX);
+        logger.debug("The following form properties are applied to search [{}]", searchFromList);
+
         HttpResponse response = HttpClientProvider.getHttpClient().execute(request);
 
         InputStream contentStream = response.getEntity().getContent();
-        Document resultPage = Jsoup.parse(contentStream, "UTF-8", "https://ncore.cc/torrents.php");
+        Document resultPage = Jsoup.parse(contentStream, "UTF-8", TORRENTS_PAGE_PREFIX);
         contentStream.close();
+
+        logger.debug("Response returned with response code [{}]", response.getStatusLine().getStatusCode());
 
         for (Element element : resultPage.select("div.torrent_txt > a")) {
             TorrentListElement torrentElement = new TorrentListElement(element.attr("title"), element.attr("href"));
             searchResults.add(torrentElement);
         }
 
+        logger.debug("Search result: [{}]", searchResults);
         return searchResults;
     }
 
@@ -105,10 +122,14 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         loginService.login();
 
-        HttpPost request = new HttpPost("https://ncore.cc/torrents.php?action=details&id=" + torrentId);
-        initBaseRequestHeaders(request);
-        request.setHeader("referer", "https://ncore.cc/torrents.php?action=details&id=" + torrentId);
+        logger.debug("Started to find torrent details for [{}]", torrentId);
 
+        String torrentDetailsUrl = TORRENT_DETAILS_PAGE_PREFIX + torrentId;
+        HttpPost request = new HttpPost(torrentDetailsUrl);
+        initBaseRequestHeaders(request);
+        request.setHeader("referer", torrentDetailsUrl);
+
+        logger.debug("POST request execute is stared to [{}]", torrentDetailsUrl);
         HttpResponse response = HttpClientProvider.getHttpClient().execute(request);
 
         TorrentDetailsFactory torrentDetailsFactory = TorrentDetailsFactory.getFactoryInstance();
@@ -116,13 +137,21 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
         InputStream contentStream = response.getEntity().getContent();
         TorrentDetails torrentDetails = torrentDetailsFactory.create(IOUtils.toString(contentStream));
         contentStream.close();
+        logger.debug("Response returned with response code [{}]", response.getStatusLine().getStatusCode());
+
+        logger.debug("The following torrent details have been found: [{}]", torrentDetails);
         return torrentDetails;
     }
 
     @Override
     public void download(String torrentId, String path) throws IOException {
         loginService.login();
-        HttpGet httpGet = new HttpGet("https://ncore.cc/torrents.php?action=download&id=" + torrentId);
+        logger.debug("Started to download torrent by [{}] to the following folder [{}]", torrentId, path);
+
+        String downloadPageUrl = TORRENT_DOWNLOAD_PAGE_PREFIX + torrentId;
+        HttpGet httpGet = new HttpGet(downloadPageUrl);
+
+        logger.debug("GET request execute is stared to [{}]", downloadPageUrl);
         HttpResponse response = HttpClientProvider.getHttpClient().execute(httpGet);
 
         String[] contentDispositionValues = response.getFirstHeader("Content-Disposition").getValue().split("\"");
@@ -130,11 +159,13 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
             throw new RuntimeException("Couldn't get filename from header");
         }
 
+        logger.debug("Response returned with response code [{}]", response.getStatusLine().getStatusCode());
+
         InputStream contentStream = response.getEntity().getContent();
-        IOUtils.copy(contentStream, new FileOutputStream(
-                new File(path + contentDispositionValues[1]))
-        );
+        IOUtils.copy(contentStream, new FileOutputStream(new File(path + contentDispositionValues[1])));
         contentStream.close();
+
+        logger.debug("Download finished successfully");
     }
 
 }

@@ -25,4 +25,11 @@ public class TorrentTypeCriterion implements SearchCriterion {
         return properties;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TorrentTypeCriterion{");
+        sb.append("torrentType=").append(torrentType);
+        sb.append('}');
+        return sb.toString();
+    }
 }
