@@ -3,9 +3,7 @@ package com.github.akosbordas.ncore.sample;
 import com.github.akosbordas.ncore.*;
 import com.github.akosbordas.ncore.authentication.CredentialsProvider;
 import com.github.akosbordas.ncore.search.TorrentTypeCriterion;
-import com.google.common.base.Throwables;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

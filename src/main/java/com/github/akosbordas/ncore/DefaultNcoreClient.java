@@ -1,5 +1,6 @@
 package com.github.akosbordas.ncore;
 
+import com.github.akosbordas.ncore.authentication.CredentialsProvider;
 import com.github.akosbordas.ncore.authentication.LoginService;
 import com.github.akosbordas.ncore.search.SearchCriterion;
 import com.github.akosbordas.ncore.search.TextSearchCriterion;
@@ -15,8 +16,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +28,19 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient {
 
+    private String username;
+    private String password;
+
+    public DefaultNcoreClient() {
+        this.password = CredentialsProvider.getPassword();
+        this.username = CredentialsProvider.getUsername();
+    }
+
+    public DefaultNcoreClient(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     private LoginService loginService = getLoginServiceInstance();
 
     public List<TorrentListElement> search(String term) throws IOException {
@@ -32,7 +48,7 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
     }
 
     private List<TorrentListElement> search(List<? extends SearchCriterion> criteria) throws IOException {
-        loginService.login();
+        loginService.login(username, password);
 
         List<TorrentListElement> searchResults = newArrayList();
 
@@ -106,7 +122,7 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
             throw new IllegalArgumentException("Torrent id cannot be null.");
         }
 
-        loginService.login();
+        loginService.login(username, password);
 
         HttpPost request = new HttpPost("https://ncore.cc/torrents.php?action=details&id=" + torrentId);
         initBaseRequestHeaders(request);
@@ -124,7 +140,7 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
     @Override
     public void download(String torrentId, String path) throws IOException {
-        loginService.login();
+        loginService.login(username, password);
         HttpGet httpGet = new HttpGet("https://ncore.cc/torrents.php?action=download&id=" + torrentId);
         HttpResponse response = HttpClientProvider.getHttpClient().execute(httpGet);
 
@@ -135,7 +151,7 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         InputStream contentStream = response.getEntity().getContent();
         IOUtils.copy(contentStream, new FileOutputStream(
-                new File(path + contentDispositionValues[1]))
+                        new File(path + contentDispositionValues[1]))
         );
         contentStream.close();
     }

@@ -14,8 +14,8 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.util.List;
 
-import static com.github.akosbordas.ncore.authentication.CredentialsProvider.*;
 import static com.github.akosbordas.ncore.HttpClientProvider.getHttpClient;
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.google.common.collect.Lists.newArrayList;
 
 public class LoginService extends ClientRequestBase {
@@ -33,7 +33,6 @@ public class LoginService extends ClientRequestBase {
         return loginServiceInstance;
 
     }
-
 
     public boolean isLoggedIn() throws IOException {
         HttpGet request = new HttpGet(TORRENTS_URL);
@@ -55,9 +54,9 @@ public class LoginService extends ClientRequestBase {
     }
 
 
-    public void login() throws IOException {
+    public void login(String username, String password) throws IOException {
 
-        if (getUsername() == null || getPassword() == null) {
+        if (isNullOrEmpty(username) || isNullOrEmpty(password)) {
             throw new RuntimeException("Missing credentials. Use CredentialsProvider and set username and password for connection.");
         }
 
@@ -71,9 +70,9 @@ public class LoginService extends ClientRequestBase {
 
             loginFormList.add(new BasicNameValuePair("set_lang", "hu"));
             loginFormList.add(new BasicNameValuePair("submitted", "1"));
-            loginFormList.add(new BasicNameValuePair("nev", getUsername()));
+            loginFormList.add(new BasicNameValuePair("nev", username));
             loginFormList.add(new BasicNameValuePair("submit", "Belépés!"));
-            loginFormList.add(new BasicNameValuePair("pass", getPassword()));
+            loginFormList.add(new BasicNameValuePair("pass", password));
 
             request.setEntity(new UrlEncodedFormEntity(loginFormList));
 

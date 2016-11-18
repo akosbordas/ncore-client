@@ -5,7 +5,6 @@ public class CredentialsProvider {
     private static String username;
     private static String password;
 
-
     public static String getUsername() {
         return username;
     }
