@@ -49,26 +49,20 @@ public class LoginServiceTest extends IntegrationTestBase {
 
     @Test(expected = RuntimeException.class)
     public void loginShouldFailWhenNoUsernameProvided() throws Exception {
-        CredentialsProvider.setUsername(null);
-        loginService.login();
+        loginService.login(null, null);
     }
 
     @Test(expected = RuntimeException.class)
     public void loginShouldFailWhenNoPasswordProvided() throws Exception {
-        CredentialsProvider.setUsername("testUser");
-        CredentialsProvider.setPassword(null);
-        loginService.login();
+        loginService.login("testUser", null);
     }
 
     @Test
     public void shouldNotCallLoginWhenUserIsAlreadyLoggedIn() throws Exception {
-        CredentialsProvider.setUsername("testUser");
-        CredentialsProvider.setPassword("testPassword");
-
         HttpResponse httpResponse = mockHttpResponse(302, readHtml("index-page.html"), "index.php");
         when(httpClient.execute(any(HttpGet.class))).thenReturn(httpResponse);
 
-        loginService.login();
+        loginService.login("testUser", "testPassword");
         // isLoggedIn is called once
         verify(httpClient, times(1)).execute(any(HttpGet.class));
 
@@ -77,14 +71,11 @@ public class LoginServiceTest extends IntegrationTestBase {
 
     @Test
     public void shouldLoginUser() throws Exception {
-        CredentialsProvider.setUsername("testUser");
-        CredentialsProvider.setPassword("testPassword");
-
         HttpResponse loginCheckReponse = mockHttpResponse(200, readHtml("login-page.html"), "login.php");
         HttpResponse loginResponse = mockHttpResponse(200, readHtml("index-page.html"), "index.php");
         when(httpClient.execute(any(HttpUriRequest.class))).thenReturn(loginCheckReponse).thenReturn(loginResponse);
 
-        loginService.login();
+        loginService.login("testUser", "testPassword");
 
         ArgumentCaptor<HttpUriRequest> requestCaptor = ArgumentCaptor.forClass(HttpUriRequest.class);
 
@@ -98,14 +89,11 @@ public class LoginServiceTest extends IntegrationTestBase {
 
     @Test(expected = RuntimeException.class)
     public void shouldFailWhenProblemOccursDuringTheRequest() throws Exception {
-        CredentialsProvider.setUsername("testUser");
-        CredentialsProvider.setPassword("testPassword");
-
         HttpResponse loginCheckReponse = mockHttpResponse(200, readHtml("login-page.html"), "login.php");
         HttpResponse loginResponse = mockHttpResponse(200, readHtml("login-page.html"), "login.php?problema=1");
         when(httpClient.execute(any(HttpUriRequest.class))).thenReturn(loginCheckReponse).thenReturn(loginResponse);
 
-        loginService.login();
+        loginService.login("testUser", "testPassword");
     }
 
 }
