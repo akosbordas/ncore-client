@@ -1,13 +1,8 @@
 package com.github.akosbordas.ncore;
 
-import com.github.akosbordas.ncore.DefaultTorrentDetails;
-import com.github.akosbordas.ncore.TorrentDetails;
-import com.github.akosbordas.ncore.TorrentDetailsParseException;
-import com.github.akosbordas.ncore.TorrentType;
 import com.github.akosbordas.ncore.ebook.EbookTorrentDetails;
 import com.github.akosbordas.ncore.movie.MovieTorrentDetails;
 import com.github.akosbordas.ncore.music.MusicTorrentDetails;
-import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +12,7 @@ import static com.github.akosbordas.ncore.TorrentDetails.DATE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class TorrentDetailsTest {
+public class TorrentDetailsTest extends TestBase {
 
     private TorrentDetails torrentDetails;
 
@@ -233,13 +228,6 @@ public class TorrentDetailsTest {
         ebookTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("ebook-custom-torrent-details.html")));
         assertThat(ebookTorrentDetails.getTags()).isEqualTo("sport");
 
-    }
-
-    private String readHtml(String name) throws IOException {
-        return IOUtils.toString(
-                this.getClass().getResourceAsStream(name),
-                "UTF-8"
-        );
     }
 
 }

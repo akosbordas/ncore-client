@@ -25,9 +25,9 @@ public class LoginService extends ClientRequestBase {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-    private static final String TORRENTS_URL = "https://ncore.cc/torrents.php";
-    private static final String LOGIN_URL = "https://ncore.cc/login.php";
-    private static final String LOCATION_HEADER = "location";
+    public static final String TORRENTS_URL = "https://ncore.cc/torrents.php";
+    public static final String LOGIN_URL = "https://ncore.cc/login.php";
+    public static final String LOCATION_HEADER = "location";
 
     private static final LoginService loginServiceInstance = new LoginService();
 
@@ -49,13 +49,13 @@ public class LoginService extends ClientRequestBase {
 
         boolean pageContainsLoginContainer = IOUtils.toString(response.getEntity().getContent()).contains("login_all");
 
-        boolean notRedirectedToLoginPage =
-            statusCode == 302 && locationHeader != null && !locationHeader.getValue().contains("login.php");
+        boolean redirectsToLoginPage =
+            statusCode == 302 && locationHeader != null && locationHeader.getValue().contains("login.php");
         boolean isOnLoginPage = statusCode == 200 && pageContainsLoginContainer;
 
         consumeQuietly(response.getEntity());
 
-        boolean loggedIn = notRedirectedToLoginPage || !isOnLoginPage;
+        boolean loggedIn = !isOnLoginPage && !redirectsToLoginPage;
         logger.debug("User was {} logged in previously", loggedIn ? "" : "not");
         return loggedIn;
     }
@@ -92,11 +92,11 @@ public class LoginService extends ClientRequestBase {
 
             logger.debug("POST request is finished and redirects to [{}]", location);
 
+            consumeQuietly(response.getEntity());
+
             if (location == null || location.getValue().contains("problema")) {
                 throw new RuntimeException("Failed to login to ncore.cc. Maybe wrong credentials?");
             }
-
-            consumeQuietly(response.getEntity());
 
             logger.debug("Login was successful");
         }

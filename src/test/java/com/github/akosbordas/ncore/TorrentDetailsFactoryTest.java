@@ -1,8 +1,5 @@
 package com.github.akosbordas.ncore;
 
-import com.github.akosbordas.ncore.TorrentDetails;
-import com.github.akosbordas.ncore.TorrentDetailsFactory;
-import com.github.akosbordas.ncore.TorrentDetailsParseException;
 import com.github.akosbordas.ncore.ebook.EbookTorrentDetails;
 import com.github.akosbordas.ncore.game.ConsoleGameTorrentDetails;
 import com.github.akosbordas.ncore.game.IsoGameTorrentDetails;
@@ -33,7 +30,7 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class TorrentDetailsFactoryTest {
+public class TorrentDetailsFactoryTest extends TestBase {
 
     private TorrentDetailsFactory factory;
 
@@ -194,11 +191,4 @@ public class TorrentDetailsFactoryTest {
         assertThat(torrentDetails).isInstanceOf(HdXxxTorrentDetails.class);
     }
 
-    private String readHtml(String name) throws IOException {
-        return IOUtils.toString(
-                this.getClass().getResourceAsStream(name),
-                "UTF-8"
-        );
-
-    }
 }
