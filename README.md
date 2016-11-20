@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/akosbordas/ncore-client.svg?branch=master)](https://travis-ci.org/akosbordas/ncore-client)
 
-NcoreClient is a Java client for [https://ncore.cc](https://ncore.cc) torrent site. NcoreClient makes it easy to automate your torrent downloads, searches from any Java program based on your needs. Ncore is a restricted site. You need to have an account on the site to use this client.
-
+NcoreClient is a Java client for [https://ncore.cc](https://ncore.cc) torrent site. This library makes it easy to automate your torrent downloads, searches from any Java program based on your needs. Ncore is a restricted site. You need to have an account on the site to use this client.
+<!---
 ### Getting started
 
 To setup library you can use `maven`. Add the following lines to your `pom.xml`:
@@ -36,3 +36,4 @@ The other option to instantiate your client by setting username and password dir
 ```java
 NcoreClient client = new DefaultNcoreClient("username", "password");
 ```
+--->
