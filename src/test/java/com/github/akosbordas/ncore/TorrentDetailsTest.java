@@ -1,10 +1,25 @@
 package com.github.akosbordas.ncore;
 
 import com.github.akosbordas.ncore.ebook.EbookTorrentDetails;
-import com.github.akosbordas.ncore.movie.MovieTorrentDetails;
+import com.github.akosbordas.ncore.game.ConsoleGameTorrentDetails;
+import com.github.akosbordas.ncore.game.GameTorrentDetails;
+import com.github.akosbordas.ncore.game.IsoGameTorrentDetails;
+import com.github.akosbordas.ncore.game.RipGameTorrentDetails;
+import com.github.akosbordas.ncore.movie.*;
+import com.github.akosbordas.ncore.music.ClipMusicTorrentDetails;
+import com.github.akosbordas.ncore.music.LosslessMusicTorrentDetails;
+import com.github.akosbordas.ncore.music.Mp3MusicTorrentDetails;
 import com.github.akosbordas.ncore.music.MusicTorrentDetails;
+import com.github.akosbordas.ncore.program.MobileProgramTorrentDetails;
+import com.github.akosbordas.ncore.program.ProgramTorrentDetails;
+import com.github.akosbordas.ncore.series.DvdSeriesTorrentDetails;
+import com.github.akosbordas.ncore.series.HdSeriesTorrentDetails;
+import com.github.akosbordas.ncore.series.SdSeriesTorrentDetails;
+import com.github.akosbordas.ncore.series.SeriesTorrentDetails;
+import com.github.akosbordas.ncore.xxx.*;
 import org.junit.Before;
 import org.junit.Test;
+import sun.plugin2.main.server.ClientJVMSelectionParameters;
 
 import java.io.IOException;
 
@@ -15,7 +30,6 @@ import static org.junit.Assert.assertTrue;
 public class TorrentDetailsTest extends TestBase {
 
     private TorrentDetails torrentDetails;
-
 
     @Before
     public void setUp() {
@@ -196,10 +210,9 @@ public class TorrentDetailsTest extends TestBase {
 
     @Test
     public void shouldParseMovieCustomTorrentDetails() throws IOException {
-
         MovieTorrentDetails movieTorrentDetails = new MovieTorrentDetails();
         movieTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("movie-custom-torrent-details.html")));
-        assertThat(movieTorrentDetails.getInfobarTitle()).isEqualTo("Moby Dick");
+        assertThat(movieTorrentDetails.getInfoBarTitle()).isEqualTo("Moby Dick");
         assertThat(movieTorrentDetails.getReleaseDate()).isEqualTo("1998");
         assertThat(movieTorrentDetails.getDirector()).isEqualTo("Franc Roddam");
         assertThat(movieTorrentDetails.getActors()).isEqualTo("Henry Thomas, Bruce Spence, Hugh Keays-Byrne, Robin Cuming, Shane Connor");
@@ -209,7 +222,7 @@ public class TorrentDetailsTest extends TestBase {
         assertThat(movieTorrentDetails.getImdbRating()).isEqualTo("6.5");
         assertThat(movieTorrentDetails.getImdbURL()).isEqualTo("http://hungarian.imdb.com/title/tt0120756");
         assertThat(movieTorrentDetails.getMafabURL()).isEqualTo("http://www.mafab.hu/movies/mob...");
-
+        assertThat(movieTorrentDetails.toString()).isEqualTo("MovieTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='Moby Dick', releaseDate='1998', director='Franc Roddam', actors='Henry Thomas, Bruce Spence, Hugh Keays-Byrne, Robin Cuming, Shane Connor', country='UK, Ausztrália, USA', length='180 perc', tags='kaland, dráma, thriller', imdbRating='6.5', imdbURL='http://hungarian.imdb.com/title/tt0120756', otherURL='', mafabURL='http://www.mafab.hu/movies/mob...'}");
     }
 
     //Did not override custom parse: SeriesTorrentDetails,GameTorrentDetails,ProgramTorrentDetails,XxxTorrentDetails
@@ -219,7 +232,7 @@ public class TorrentDetailsTest extends TestBase {
         MusicTorrentDetails musicTorrentDetails = new MusicTorrentDetails();
         musicTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("music-custom-torrent-details.html")));
         assertThat(musicTorrentDetails.getTags()).isEqualTo("audiobook");
-
+        assertThat(musicTorrentDetails.toString()).isEqualTo("MusicTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='audiobook'}");
     }
 
     @Test
@@ -227,7 +240,38 @@ public class TorrentDetailsTest extends TestBase {
         EbookTorrentDetails ebookTorrentDetails = new EbookTorrentDetails();
         ebookTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("ebook-custom-torrent-details.html")));
         assertThat(ebookTorrentDetails.getTags()).isEqualTo("sport");
-
+        assertThat(ebookTorrentDetails.toString()).isEqualTo("EbookTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='sport'}");
     }
 
+    @Test
+    public void toStringShouldContainsAllBasicInfo() throws Exception {
+        assertThat(new EbookTorrentDetails().toString()).isEqualTo("EbookTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='null'}");
+        assertThat(new ConsoleGameTorrentDetails().toString()).isEqualTo("ConsoleGameTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new GameTorrentDetails().toString()).isEqualTo("GameTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new IsoGameTorrentDetails().toString()).isEqualTo("IsoGameTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new RipGameTorrentDetails().toString()).isEqualTo("RipGameTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new Dvd9MovieTorrentDetails().toString()).isEqualTo("Dvd9MovieTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new DvdMovieTorrentDetails().toString()).isEqualTo("DvdMovieTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new HdMovieTorrentDetails().toString()).isEqualTo("HdMovieTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new MovieTorrentDetails().toString()).isEqualTo("MovieTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new SdMovieTorrentDetails().toString()).isEqualTo("SdMovieTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new ClipMusicTorrentDetails().toString()).isEqualTo("ClipMusicTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='null'}");
+        assertThat(new LosslessMusicTorrentDetails().toString()).isEqualTo("LosslessMusicTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='null'}");
+        assertThat(new Mp3MusicTorrentDetails().toString()).isEqualTo("Mp3MusicTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='null'}");
+        assertThat(new MusicTorrentDetails().toString()).isEqualTo("MusicTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='null'}");
+        assertThat(new IsoGameTorrentDetails().toString()).isEqualTo("IsoGameTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new MobileProgramTorrentDetails().toString()).isEqualTo("MobileProgramTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new ProgramTorrentDetails().toString()).isEqualTo("ProgramTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new RipGameTorrentDetails().toString()).isEqualTo("RipGameTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new DvdSeriesTorrentDetails().toString()).isEqualTo("DvdSeriesTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new HdSeriesTorrentDetails().toString()).isEqualTo("HdSeriesTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new SdSeriesTorrentDetails().toString()).isEqualTo("SdSeriesTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new SeriesTorrentDetails().toString()).isEqualTo("SeriesTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', infoBarTitle='null', releaseDate='null', director='null', actors='null', country='null', length='null', tags='null', imdbRating='null', imdbURL='null', otherURL='null', mafabURL='null'}");
+        assertThat(new DvdXxxTorrentDetails().toString()).isEqualTo("DvdXxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new HdXxxTorrentDetails().toString()).isEqualTo("HdXxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new ImagesetXxxTorrentDetails().toString()).isEqualTo("ImagesetXxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new SdXxxTorrentDetails().toString()).isEqualTo("SdXxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new XxxTorrentDetails().toString()).isEqualTo("XxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+
+    }
 }

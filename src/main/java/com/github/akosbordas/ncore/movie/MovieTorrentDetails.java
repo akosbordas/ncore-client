@@ -5,21 +5,21 @@ import org.jsoup.nodes.Document;
 
 public class MovieTorrentDetails extends TorrentDetails {
 
-    private String infobar_title;
-    private String releaseDate;
-    private String director;
-    private String actors;
-    private String country;
-    private String length;
-    private String tags;
-    private String imdbRating;
-    private String imdbURL;
-    private String otherURL;
-    private String mafabURL;
+    protected String infoBarTitle;
+    protected String releaseDate;
+    protected String director;
+    protected String actors;
+    protected String country;
+    protected String length;
+    protected String tags;
+    protected String imdbRating;
+    protected String imdbURL;
+    protected String otherURL;
+    protected String mafabURL;
 
 
-    public String getInfobarTitle() {
-        return infobar_title;
+    public String getInfoBarTitle() {
+        return infoBarTitle;
     }
 
     public String getReleaseDate() {
@@ -64,7 +64,7 @@ public class MovieTorrentDetails extends TorrentDetails {
 
     public void customParse(Document document) {
 
-        infobar_title = document.select("div.infobar_title").text();
+        infoBarTitle = document.select("div.infobar_title").text();
         releaseDate = extractTypeSpecificInfoByName(document, "Megjelenés éve");
         director = extractTypeSpecificInfoByName(document, "Rendező");
         actors = extractTypeSpecificInfoByName(document, "Szereplők");
@@ -75,22 +75,33 @@ public class MovieTorrentDetails extends TorrentDetails {
         imdbURL = extractTypeSpecificInfoByName(document, "IMDb link");
         otherURL = extractTypeSpecificInfoByName(document, "Egyéb link");
         mafabURL = extractTypeSpecificInfoByName(document, "Mafab.hu link");
-
     }
 
     @Override
     public String toString() {
-        return  super.toString() +
-                ", infobar_title='" + infobar_title + '\'' +
-                ", releaseDate='" + releaseDate + '\'' +
-                ", director='" + director + '\'' +
-                ", actors='" + actors + '\'' +
-                ", country='" + country + '\'' +
-                ", length='" + length + '\'' +
-                ", tags='" + tags + '\'' +
-                ", imdbRating='" + imdbRating + '\'' +
-                ", imdbURL='" + imdbURL + '\'' +
-                ", otherURL='" + otherURL + '\'' +
-                ", mafabURL='" + mafabURL + '\'' ;
+        final StringBuilder sb = new StringBuilder("MovieTorrentDetails{");
+        sb.append("uploadDate='").append(uploadDate).append('\'');
+        sb.append(", uploader='").append(uploader).append('\'');
+        sb.append(", commentCount='").append(commentCount).append('\'');
+        sb.append(", seederCount='").append(seederCount).append('\'');
+        sb.append(", leecherCount='").append(leecherCount).append('\'');
+        sb.append(", downloadCount='").append(downloadCount).append('\'');
+        sb.append(", speed='").append(speed).append('\'');
+        sb.append(", size='").append(size).append('\'');
+        sb.append(", fileCount='").append(fileCount).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", infoBarTitle='").append(infoBarTitle).append('\'');
+        sb.append(", releaseDate='").append(releaseDate).append('\'');
+        sb.append(", director='").append(director).append('\'');
+        sb.append(", actors='").append(actors).append('\'');
+        sb.append(", country='").append(country).append('\'');
+        sb.append(", length='").append(length).append('\'');
+        sb.append(", tags='").append(tags).append('\'');
+        sb.append(", imdbRating='").append(imdbRating).append('\'');
+        sb.append(", imdbURL='").append(imdbURL).append('\'');
+        sb.append(", otherURL='").append(otherURL).append('\'');
+        sb.append(", mafabURL='").append(mafabURL).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

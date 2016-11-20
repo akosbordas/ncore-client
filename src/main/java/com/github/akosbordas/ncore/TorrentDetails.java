@@ -9,18 +9,18 @@ import java.util.Date;
 
 public abstract class TorrentDetails {
 
-    private Date uploadDate;
+    protected Date uploadDate;
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private String uploader;
-    private String commentCount;
-    private String seederCount;
-    private String leecherCount;
-    private String downloadCount;
-    private String speed;
-    private String size;
-    private String fileCount;
-    private String description;
+    protected String uploader;
+    protected String commentCount;
+    protected String seederCount;
+    protected String leecherCount;
+    protected String downloadCount;
+    protected String speed;
+    protected String size;
+    protected String fileCount;
+    protected String description;
 
     public static Document parseHtml(String html){
         return Jsoup.parse(html,"https://ncore.cc/");
@@ -237,18 +237,4 @@ public abstract class TorrentDetails {
         return result;
     }
 
-    @Override
-    //NOT GENERATED
-    public String toString() {
-        return  "uploadDate=" + uploadDate +
-                ", uploader='" + uploader + '\'' +
-                ", commentCount='" + commentCount + '\'' +
-                ", seederCount='" + seederCount + '\'' +
-                ", leecherCount='" + leecherCount + '\'' +
-                ", downloadCount='" + downloadCount + '\'' +
-                ", speed='" + speed + '\'' +
-                ", size='" + size + '\'' +
-                ", fileCount='" + fileCount + '\'' +
-                ", description='" + description + '\'';
-    }
 }
