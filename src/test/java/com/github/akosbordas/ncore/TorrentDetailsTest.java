@@ -10,8 +10,10 @@ import com.github.akosbordas.ncore.music.ClipMusicTorrentDetails;
 import com.github.akosbordas.ncore.music.LosslessMusicTorrentDetails;
 import com.github.akosbordas.ncore.music.Mp3MusicTorrentDetails;
 import com.github.akosbordas.ncore.music.MusicTorrentDetails;
+import com.github.akosbordas.ncore.program.IsoProgramTorrentDetails;
 import com.github.akosbordas.ncore.program.MobileProgramTorrentDetails;
 import com.github.akosbordas.ncore.program.ProgramTorrentDetails;
+import com.github.akosbordas.ncore.program.RipProgramTorrentDetails;
 import com.github.akosbordas.ncore.series.DvdSeriesTorrentDetails;
 import com.github.akosbordas.ncore.series.HdSeriesTorrentDetails;
 import com.github.akosbordas.ncore.series.SdSeriesTorrentDetails;
@@ -271,6 +273,9 @@ public class TorrentDetailsTest extends TestBase {
         assertThat(new ImagesetXxxTorrentDetails().toString()).isEqualTo("ImagesetXxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
         assertThat(new SdXxxTorrentDetails().toString()).isEqualTo("SdXxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
         assertThat(new XxxTorrentDetails().toString()).isEqualTo("XxxTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
-
+        assertThat(new IsoProgramTorrentDetails().toString()).isEqualTo("IsoProgramTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new MobileProgramTorrentDetails().toString()).isEqualTo("MobileProgramTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new ProgramTorrentDetails().toString()).isEqualTo("ProgramTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
+        assertThat(new RipProgramTorrentDetails().toString()).isEqualTo("RipProgramTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null'}");
     }
 }
