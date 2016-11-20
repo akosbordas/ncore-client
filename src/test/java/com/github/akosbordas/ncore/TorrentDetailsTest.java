@@ -19,7 +19,6 @@ import com.github.akosbordas.ncore.series.SeriesTorrentDetails;
 import com.github.akosbordas.ncore.xxx.*;
 import org.junit.Before;
 import org.junit.Test;
-import sun.plugin2.main.server.ClientJVMSelectionParameters;
 
 import java.io.IOException;
 
