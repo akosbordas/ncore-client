@@ -39,7 +39,7 @@ public class TorrentDetailsTest extends TestBase {
 
     @Test
     public void shouldPassIfParsedAllFields() throws Exception {
-        String html = readHtml("torrent-details-parse-success.html");
+        String html = readFile("torrent-details-parse-success.html");
         torrentDetails.parse(html);
         assertThat(torrentDetails.getUploadDate()).isEqualTo(DATE_FORMAT.parse("2016-07-25 20:00:29"));
         assertThat(torrentDetails.getUploader()).isEqualTo("Anonymous");
@@ -56,7 +56,7 @@ public class TorrentDetailsTest extends TestBase {
 
     @Test
     public void shouldPassIfParsedEmptyStringFromClassWithoutValue() throws IOException {
-        String html = readHtml("torrent-details-parse-empty-string.html");
+        String html = readFile("torrent-details-parse-empty-string.html");
         torrentDetails.parse(html);
         assertThat(torrentDetails.getCommentCount()).isEqualTo("");
 
@@ -64,155 +64,155 @@ public class TorrentDetailsTest extends TestBase {
 
     @Test(expected = TorrentDetailsParseException.class)
     public void shouldPassIfThrowsExceptionOnParse() throws IOException {
-        String html = readHtml("torrent-details-parse-throw-exception.html");
+        String html = readFile("torrent-details-parse-throw-exception.html");
         torrentDetails.parse(html);
 
     }
 
     @Test
     public void shouldPassIfParsedLanguageCorrectly() throws IOException {
-        String html = readHtml("torrent-details-language-parse.html");
+        String html = readFile("torrent-details-language-parse.html");
         assertTrue(torrentDetails.parseType(html).isEnglish());
 
     }
 
     @Test(expected = TorrentDetailsParseException.class)
     public void shouldPassIfThrowsExceptionOnTypeParse() throws IOException {
-        String html = readHtml("torrent-details-parse-type-throw-exception.html");
+        String html = readFile("torrent-details-parse-type-throw-exception.html");
         torrentDetails.parseType(html);
 
     }
 
     @Test
     public void shouldParseSdMovieTorrentType() throws IOException {
-        String html = readHtml("sd-movie-torrent-type.html");
+        String html = readFile("sd-movie-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_SD);
     }
 
     @Test
     public void shouldParseHdMovieTorrentType() throws IOException {
-        String html = readHtml("hd-movie-torrent-type.html");
+        String html = readFile("hd-movie-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_HD);
     }
 
     @Test
     public void shouldParseDvdMovieTorrentType() throws IOException {
-        String html = readHtml("dvd-movie-torrent-type.html");
+        String html = readFile("dvd-movie-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_DVD);
     }
 
     @Test
     public void shouldParseDvd9MovieTorrentType() throws IOException {
-        String html = readHtml("dvd9-movie-torrent-type.html");
+        String html = readFile("dvd9-movie-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_DVD9);
     }
 
     @Test
     public void shouldParseSdSeriesTorrentType() throws IOException {
-        String html = readHtml("sd-series-torrent-type.html");
+        String html = readFile("sd-series-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.SERIES_SD);
     }
 
     @Test
     public void shouldParseHdSeriesTorrentType() throws IOException {
-        String html = readHtml("hd-series-torrent-type.html");
+        String html = readFile("hd-series-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.SERIES_HD);
     }
 
     @Test
     public void shouldParseDvdSeriesTorrentType() throws IOException {
-        String html = readHtml("dvd-series-torrent-type.html");
+        String html = readFile("dvd-series-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.SERIES_DVD);
     }
 
     @Test
     public void shouldParseMp3MusicTorrentType() throws IOException {
-        String html = readHtml("mp3-music-torrent-type.html");
+        String html = readFile("mp3-music-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MUSIC_MP3);
     }
 
     @Test
     public void shouldParseLosslessMusicTorrentType() throws IOException {
-        String html = readHtml("lossless-music-torrent-type.html");
+        String html = readFile("lossless-music-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MUSIC_LOSSLESS);
     }
 
     @Test
     public void shouldParseClipMusicTorrentType() throws IOException {
-        String html = readHtml("clip-music-torrent-type.html");
+        String html = readFile("clip-music-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MUSIC_CLIP);
     }
 
     @Test
     public void shouldParseEbookTorrentType() throws IOException {
-        String html = readHtml("ebook-torrent-type.html");
+        String html = readFile("ebook-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.E_BOOK);
     }
 
     @Test
     public void shouldParseIsoGameTorrentType() throws IOException {
-        String html = readHtml("iso-game-torrent-type.html");
+        String html = readFile("iso-game-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.GAME_ISO);
     }
 
     @Test
     public void shouldParseRipGameTorrentType() throws IOException {
-        String html = readHtml("rip-game-torrent-type.html");
+        String html = readFile("rip-game-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.GAME_RIP);
     }
 
     @Test
     public void shouldParseConsoleGameTorrentType() throws IOException {
-        String html = readHtml("console-game-torrent-type.html");
+        String html = readFile("console-game-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.GAME_CONSOLE);
     }
 
     @Test
     public void shouldParseSdXxxTorrentType() throws IOException {
-        String html = readHtml("sd-xxx-torrent-type.html");
+        String html = readFile("sd-xxx-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_SD);
     }
 
     @Test
     public void shouldParseHdXxxTorrentType() throws IOException {
-        String html = readHtml("hd-xxx-torrent-type.html");
+        String html = readFile("hd-xxx-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_HD);
     }
 
     @Test
     public void shouldParseDvdXxxTorrentType() throws IOException {
-        String html = readHtml("dvd-xxx-torrent-type.html");
+        String html = readFile("dvd-xxx-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_DVD);
     }
 
     @Test
     public void shouldParseImagesetXxxTorrentType() throws IOException {
-        String html = readHtml("imageset-xxx-torrent-type.html");
+        String html = readFile("imageset-xxx-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_IMAGESET);
     }
 
     @Test
     public void shouldParseIsoProgramTorrentType() throws IOException {
-        String html = readHtml("iso-program-torrent-type.html");
+        String html = readFile("iso-program-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_ISO);
     }
 
     @Test
     public void shouldParseRipProgramTorrentType() throws IOException {
-        String html = readHtml("rip-program-torrent-type.html");
+        String html = readFile("rip-program-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_RIP);
     }
 
     @Test
     public void shouldParseMobileProgramTorrentType() throws IOException {
-        String html = readHtml("mobile-program-torrent-type.html");
+        String html = readFile("mobile-program-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_MOBILE);
     }
 
     @Test
     public void shouldParseMovieCustomTorrentDetails() throws IOException {
         MovieTorrentDetails movieTorrentDetails = new MovieTorrentDetails();
-        movieTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("movie-custom-torrent-details.html")));
+        movieTorrentDetails.customParse(TorrentDetails.parseHtml(readFile("movie-custom-torrent-details.html")));
         assertThat(movieTorrentDetails.getInfoBarTitle()).isEqualTo("Moby Dick");
         assertThat(movieTorrentDetails.getReleaseDate()).isEqualTo("1998");
         assertThat(movieTorrentDetails.getDirector()).isEqualTo("Franc Roddam");
@@ -231,7 +231,7 @@ public class TorrentDetailsTest extends TestBase {
     @Test
     public void shouldParseMusicCustomTorrentDetails() throws IOException {
         MusicTorrentDetails musicTorrentDetails = new MusicTorrentDetails();
-        musicTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("music-custom-torrent-details.html")));
+        musicTorrentDetails.customParse(TorrentDetails.parseHtml(readFile("music-custom-torrent-details.html")));
         assertThat(musicTorrentDetails.getTags()).isEqualTo("audiobook");
         assertThat(musicTorrentDetails.toString()).isEqualTo("MusicTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='audiobook'}");
     }
@@ -239,7 +239,7 @@ public class TorrentDetailsTest extends TestBase {
     @Test
     public void shouldParseEbookCustomTorrentDetails() throws IOException {
         EbookTorrentDetails ebookTorrentDetails = new EbookTorrentDetails();
-        ebookTorrentDetails.customParse(TorrentDetails.parseHtml(readHtml("ebook-custom-torrent-details.html")));
+        ebookTorrentDetails.customParse(TorrentDetails.parseHtml(readFile("ebook-custom-torrent-details.html")));
         assertThat(ebookTorrentDetails.getTags()).isEqualTo("sport");
         assertThat(ebookTorrentDetails.toString()).isEqualTo("EbookTorrentDetails{uploadDate='null', uploader='null', commentCount='null', seederCount='null', leecherCount='null', downloadCount='null', speed='null', size='null', fileCount='null', description='null', tags='sport'}");
     }

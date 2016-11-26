@@ -21,8 +21,4 @@ public class CredentialsProvider {
         CredentialsProvider.password = password;
     }
 
-
-
-
-
 }

@@ -40,19 +40,28 @@ public class IntegrationTestBase extends TestBase {
         objectMapper.registerModule(module);
     }
     
-    protected HttpResponse mockHttpResponse(int statusCode, String htmlContent, String locationHeaderValue) throws IOException {
+    protected HttpResponse mockHttpResponse(int statusCode, String htmlContent, String locationHeaderValue, String contentDisposition) throws IOException {
         HttpResponse httpResponse = mock(HttpResponse.class);
         StatusLine statusLine = mock(StatusLine.class);
         HttpEntity httpEntity = mock(HttpEntity.class);
 
         when(httpResponse.getLastHeader("location")).thenReturn(new BasicHeader("location", locationHeaderValue));
         when(httpResponse.getFirstHeader("location")).thenReturn(new BasicHeader("location", locationHeaderValue));
+        when(httpResponse.getFirstHeader("Content-Disposition")).thenReturn(new BasicHeader("Content-Disposition", contentDisposition));
         when(statusLine.getStatusCode()).thenReturn(statusCode);
         when(httpResponse.getStatusLine()).thenReturn(statusLine);
         when(httpResponse.getEntity()).thenReturn(httpEntity);
         when(httpEntity.getContent()).thenReturn(new ByteArrayInputStream(htmlContent.getBytes(UTF_8)));
 
         return httpResponse;
+    }
+
+    protected HttpResponse mockHttpResponse(int statusCode, String htmlContent, String locationHeaderValue) throws IOException {
+        return mockHttpResponse(statusCode, htmlContent, locationHeaderValue, null);
+    }
+
+    protected HttpResponse mockHttpResponse(int statusCode, String htmlContent) throws IOException {
+        return mockHttpResponse(statusCode, htmlContent, null, null);
     }
 
 }

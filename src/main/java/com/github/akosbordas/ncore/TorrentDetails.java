@@ -125,80 +125,40 @@ public abstract class TorrentDetails {
         return uploadDate;
     }
 
-    public void setUploadDate(Date uploadDate) {
-        this.uploadDate = uploadDate;
-    }
-
     public String getUploader() {
         return uploader;
-    }
-
-    public void setUploader(String uploader) {
-        this.uploader = uploader;
     }
 
     public String getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
-    }
-
     public String getSeederCount() {
         return seederCount;
-    }
-
-    public void setSeederCount(String seederCount) {
-        this.seederCount = seederCount;
     }
 
     public String getLeecherCount() {
         return leecherCount;
     }
 
-    public void setLeecherCount(String leecherCount) {
-        this.leecherCount = leecherCount;
-    }
-
     public String getDownloadCount() {
         return downloadCount;
-    }
-
-    public void setDownloadCount(String downloadCount) {
-        this.downloadCount = downloadCount;
     }
 
     public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(String speed) {
-        this.speed = speed;
-    }
-
     public String getSize() {
         return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public String getFileCount() {
         return fileCount;
     }
 
-    public void setFileCount(String fileCount) {
-        this.fileCount = fileCount;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override

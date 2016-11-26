@@ -28,21 +28,21 @@ public class LoginServiceTest extends IntegrationTestBase {
 
     @Test
     public void shouldBeLoggedIn() throws Exception {
-        HttpResponse httpResponse = mockHttpResponse(302, readHtml("index-page.html"), "index.php");
+        HttpResponse httpResponse = mockHttpResponse(302, readFile("index-page.html"), "index.php");
         when(httpClient.execute(any(HttpGet.class))).thenReturn(httpResponse);
         assertThat(loginService.isLoggedIn()).isTrue();
     }
 
     @Test
     public void shouldNotBeLoggedInWhenResponseRedirectsBackToLoginPage() throws Exception {
-        HttpResponse httpResponse = mockHttpResponse(302, readHtml("login-page.html"), "login.php");
+        HttpResponse httpResponse = mockHttpResponse(302, readFile("login-page.html"), "login.php");
         when(httpClient.execute(any(HttpGet.class))).thenReturn(httpResponse);
         assertThat(loginService.isLoggedIn()).isFalse();
     }
 
     @Test
     public void shouldNotBeLoggedInWhenLandingPageIsTheLoginPageAgain() throws Exception {
-        HttpResponse httpResponse = mockHttpResponse(200, readHtml("login-page.html"), "login.php");
+        HttpResponse httpResponse = mockHttpResponse(200, readFile("login-page.html"), "login.php");
         when(httpClient.execute(any(HttpGet.class))).thenReturn(httpResponse);
         assertThat(loginService.isLoggedIn()).isFalse();
     }
@@ -59,7 +59,7 @@ public class LoginServiceTest extends IntegrationTestBase {
 
     @Test
     public void shouldNotCallLoginWhenUserIsAlreadyLoggedIn() throws Exception {
-        HttpResponse httpResponse = mockHttpResponse(302, readHtml("index-page.html"), "index.php");
+        HttpResponse httpResponse = mockHttpResponse(302, readFile("index-page.html"), "index.php");
         when(httpClient.execute(any(HttpGet.class))).thenReturn(httpResponse);
 
         loginService.login("testUser", "testPassword");
@@ -71,8 +71,8 @@ public class LoginServiceTest extends IntegrationTestBase {
 
     @Test
     public void shouldLoginUser() throws Exception {
-        HttpResponse loginCheckReponse = mockHttpResponse(200, readHtml("login-page.html"), "login.php");
-        HttpResponse loginResponse = mockHttpResponse(200, readHtml("index-page.html"), "index.php");
+        HttpResponse loginCheckReponse = mockHttpResponse(200, readFile("login-page.html"), "login.php");
+        HttpResponse loginResponse = mockHttpResponse(200, readFile("index-page.html"), "index.php");
         when(httpClient.execute(any(HttpUriRequest.class))).thenReturn(loginCheckReponse).thenReturn(loginResponse);
 
         loginService.login("testUser", "testPassword");
@@ -89,8 +89,8 @@ public class LoginServiceTest extends IntegrationTestBase {
 
     @Test(expected = RuntimeException.class)
     public void shouldFailWhenProblemOccursDuringTheRequest() throws Exception {
-        HttpResponse loginCheckReponse = mockHttpResponse(200, readHtml("login-page.html"), "login.php");
-        HttpResponse loginResponse = mockHttpResponse(200, readHtml("login-page.html"), "login.php?problema=1");
+        HttpResponse loginCheckReponse = mockHttpResponse(200, readFile("login-page.html"), "login.php");
+        HttpResponse loginResponse = mockHttpResponse(200, readFile("login-page.html"), "login.php?problema=1");
         when(httpClient.execute(any(HttpUriRequest.class))).thenReturn(loginCheckReponse).thenReturn(loginResponse);
 
         loginService.login("testUser", "testPassword");

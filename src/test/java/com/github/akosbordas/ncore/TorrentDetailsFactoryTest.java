@@ -21,11 +21,8 @@ import com.github.akosbordas.ncore.xxx.DvdXxxTorrentDetails;
 import com.github.akosbordas.ncore.xxx.HdXxxTorrentDetails;
 import com.github.akosbordas.ncore.xxx.ImagesetXxxTorrentDetails;
 import com.github.akosbordas.ncore.xxx.SdXxxTorrentDetails;
-import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,35 +43,35 @@ public class TorrentDetailsFactoryTest extends TestBase {
 
     @Test
     public void shouldParseSdMovieTorrentDetails() throws Exception {
-        String html = readHtml("sd-movie-torrent-details.html");
+        String html = readFile("sd-movie-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(SdMovieTorrentDetails.class);
     }
 
     @Test
     public void shouldParseDvdMovieTorrentDetails() throws Exception {
-        String html = readHtml("dvd-movie-torrent-details.html");
+        String html = readFile("dvd-movie-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(DvdMovieTorrentDetails.class);
     }
 
     @Test
     public void shouldParseDvd9MovieTorrentDetails() throws Exception {
-        String html = readHtml("dvd9-movie-torrent-details.html");
+        String html = readFile("dvd9-movie-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(Dvd9MovieTorrentDetails.class);
     }
 
     @Test
     public void shouldParseHdMovieTorrentDetails() throws Exception {
-        String html = readHtml("hd-movie-torrent-details.html");
+        String html = readFile("hd-movie-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(HdMovieTorrentDetails.class);
     }
 
     @Test
     public void shouldParseSdSeriesTorrentDetails() throws Exception {
-        String html = readHtml("sd-series-torrent-details.html");
+        String html = readFile("sd-series-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(SdSeriesTorrentDetails.class);
     }
@@ -82,111 +79,111 @@ public class TorrentDetailsFactoryTest extends TestBase {
 
     @Test
     public void shouldParseDvdSeriesTorrentDetails() throws Exception {
-        String html = readHtml("dvd-series-torrent-details.html");
+        String html = readFile("dvd-series-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(DvdSeriesTorrentDetails.class);
     }
 
     @Test
     public void shouldParseHdSeriesTorrentDetails() throws Exception {
-        String html = readHtml("hd-series-torrent-details.html");
+        String html = readFile("hd-series-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(HdSeriesTorrentDetails.class);
     }
     @Test
     public void shouldParseMp3MusicTorrentDetails() throws Exception{
-        String html = readHtml("mp3-music-torrent-details.html");
+        String html = readFile("mp3-music-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(Mp3MusicTorrentDetails.class);
     }
 
     @Test
     public void shouldParseLosslessMusicTorrentDetails() throws Exception{
-        String html = readHtml("lossless-music-torrent-details.html");
+        String html = readFile("lossless-music-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(LosslessMusicTorrentDetails.class);
     }
 
     @Test
     public void shouldParseClipMusicTorrentDetails() throws Exception{
-        String html = readHtml("clip-music-torrent-details.html");
+        String html = readFile("clip-music-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(ClipMusicTorrentDetails.class);
     }
 
     @Test
     public void shouldParseIsoGameTorrentDetails() throws Exception{
-        String html = readHtml("iso-game-torrent-details.html");
+        String html = readFile("iso-game-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(IsoGameTorrentDetails.class);
     }
 
     @Test
     public void shouldParseRipGameTorrentDetails() throws Exception{
-        String html = readHtml("rip-game-torrent-details.html");
+        String html = readFile("rip-game-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(RipGameTorrentDetails.class);
     }
 
     @Test
     public void shouldParseConsoleGameTorrentDetails() throws Exception{
-        String html = readHtml("console-game-torrent-details.html");
+        String html = readFile("console-game-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(ConsoleGameTorrentDetails.class);
     }
 
     @Test
     public void shouldParseEbookTorrentDetails() throws Exception{
-        String html = readHtml("ebook-torrent-details.html");
+        String html = readFile("ebook-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(EbookTorrentDetails.class);
     }
 
     @Test
     public void shouldParseIsoProgramTorrentDetails() throws Exception{
-        String html = readHtml("iso-program-torrent-details.html");
+        String html = readFile("iso-program-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(IsoProgramTorrentDetails.class);
     }
 
     @Test
     public void shouldParseRipProgramTorrentDetails() throws Exception{
-        String html = readHtml("rip-program-torrent-details.html");
+        String html = readFile("rip-program-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(RipProgramTorrentDetails.class);
     }
 
     @Test
     public void shouldParseMobileProgramTorrentDetails() throws Exception{
-        String html = readHtml("mobile-program-torrent-details.html");
+        String html = readFile("mobile-program-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(MobileProgramTorrentDetails.class);
     }
 
     @Test
     public void shouldParseSdXxxTorrentDetails() throws Exception{
-        String html = readHtml("sd-xxx-torrent-details.html");
+        String html = readFile("sd-xxx-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(SdXxxTorrentDetails.class);
     }
 
     @Test
     public void shouldParseDvdXxxTorrentDetails() throws Exception{
-        String html = readHtml("dvd-xxx-torrent-details.html");
+        String html = readFile("dvd-xxx-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(DvdXxxTorrentDetails.class);
     }
 
     @Test
     public void shouldParseImagesetXxxTorrentDetails() throws Exception{
-        String html = readHtml("imageset-xxx-torrent-details.html");
+        String html = readFile("imageset-xxx-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(ImagesetXxxTorrentDetails.class);
     }
 
     @Test
     public void shouldParseHdXxxTorrentDetails() throws Exception{
-        String html = readHtml("hd-xxx-torrent-details.html");
+        String html = readFile("hd-xxx-torrent-details.html");
         TorrentDetails torrentDetails = factory.create(html);
         assertThat(torrentDetails).isInstanceOf(HdXxxTorrentDetails.class);
     }

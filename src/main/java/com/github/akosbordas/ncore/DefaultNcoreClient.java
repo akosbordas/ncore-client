@@ -169,19 +169,22 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
         HttpResponse response = HttpClientProvider.getHttpClient().execute(httpGet);
 
         String[] contentDispositionValues = response.getFirstHeader("Content-Disposition").getValue().split("\"");
-        if (contentDispositionValues.length < 2 && contentDispositionValues[1] == null) {
+        if (contentDispositionValues.length < 2 || contentDispositionValues[1] == null) {
             throw new RuntimeException("Couldn't get filename from header");
         }
 
         logger.debug("Response returned with response code [{}]", response.getStatusLine().getStatusCode());
 
         InputStream contentStream = response.getEntity().getContent();
-        IOUtils.copy(contentStream, new FileOutputStream(
-                        new File(path + contentDispositionValues[1]))
-        );
+        FileOutputStream output = new FileOutputStream(new File(path + contentDispositionValues[1]));
+        IOUtils.copy(contentStream, output);
         contentStream.close();
+        output.close();
 
         logger.debug("Download finished successfully");
     }
 
+    public void setLoginService(LoginService loginService) {
+        this.loginService = loginService;
+    }
 }

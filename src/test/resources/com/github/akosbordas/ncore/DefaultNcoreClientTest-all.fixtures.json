@@ -1,0 +1,395 @@
+{
+  "shouldSearchForTermAndFindResults-request": {
+    "uri": "https://ncore.cc/torrents.php",
+    "entity": {
+      "contentType": {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded"
+      },
+      "content": "mire=inception&type=all_own&miben=name&submit.x=0&submit.y=0&submit=Ok&tags="
+    },
+    "method": "POST",
+    "requestLine": {
+      "method": "POST",
+      "uri": "https://ncore.cc/torrents.php",
+      "protocolVersion": {
+        "protocol": "HTTP",
+        "major": 1,
+        "minor": 1
+      }
+    },
+    "allHeaders": [
+      {
+        "name": "accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+      },
+      {
+        "name": "accept-encoding",
+        "value": "gzip, deflate, br"
+      },
+      {
+        "name": "accept-language",
+        "value": "hu-HU,hu;q=0.8,en-US;q=0.6,en;q=0.4"
+      },
+      {
+        "name": "cache-control",
+        "value": "max-age=0"
+      },
+      {
+        "name": "content-type",
+        "value": "application/x-www-form-urlencoded"
+      },
+      {
+        "name": "origin",
+        "value": "https://ncore.cc"
+      },
+      {
+        "name": "upgrade-insecure-requests",
+        "value": "1"
+      },
+      {
+        "name": "user-agent",
+        "value": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+      },
+      {
+        "name": "referer",
+        "value": "https://ncore.cc/torrents.php"
+      }
+    ]
+  },
+  "shouldSearchForTermAndFindResults-results": [
+    {
+      "name": "VA-Minimal_Inception__Vol_2_(Minimal_Elegance_Tunes)-WEB-2016-iHR",
+      "url": "https://ncore.cc/torrents.php?action=details&id=2036940",
+      "id": "2036940"
+    },
+    {
+      "name": "Inception.2010.iNTERNAL.BDRip.x264-REGRET",
+      "url": "https://ncore.cc/torrents.php?action=details&id=2009695",
+      "id": "2009695"
+    },
+    {
+      "name": "Inception.2010.BD25.Retail.AVC.x264.DTS-HD.MA.HUN-Mont",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1993075",
+      "id": "1993075"
+    },
+    {
+      "name": "Hans Zimmer - Inception OST",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1968877",
+      "id": "1968877"
+    },
+    {
+      "name": "Inception.2010.1080p.Blu-ray.Remux.VC-1.DTS-HD.MA.5.1-KRaLiMaRKo",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1906020",
+      "id": "1906020"
+    },
+    {
+      "name": "Oceans.11.2001.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1690281",
+      "id": "1690281"
+    },
+    {
+      "name": "Oceans.12.2004.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1690280",
+      "id": "1690280"
+    },
+    {
+      "name": "Oceans.13.2007.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1690279",
+      "id": "1690279"
+    },
+    {
+      "name": "Inception.RERiP.DVDRiP.XviD-ARROW ",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1643020",
+      "id": "1643020"
+    },
+    {
+      "name": "Inception.2010.1080p.REMUX.AVC.BluRay.DTS-HD.MA.5.1.HUN-C4",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1622736",
+      "id": "1622736"
+    },
+    {
+      "name": "STARLIGHT.INCEPTION-POSTMORTEM",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1573680",
+      "id": "1573680"
+    },
+    {
+      "name": "Fack.ju.Goehte.2013.German.AC3.BDRip.x264-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1554463",
+      "id": "1554463"
+    },
+    {
+      "name": "Inception.2010.RETAiL.HUN.PAL.DVDR-MWT",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1509182",
+      "id": "1509182"
+    },
+    {
+      "name": "Inception.2010.720p.BluRay.DTS.x264-HiDt",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1433201",
+      "id": "1433201"
+    },
+    {
+      "name": "Inception.German.2010.AC3.DVDRip.XviD-KiNOWELT",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1360451",
+      "id": "1360451"
+    },
+    {
+      "name": "Inception.2010.BDRip.Xvid.Hun-PpB",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1342923",
+      "id": "1342923"
+    },
+    {
+      "name": "Ghettogangz.2.Ultimatum.2009.German.AC3.DL.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1207382",
+      "id": "1207382"
+    },
+    {
+      "name": "Hans_Zimmer-Inception-OST-2010-EiTheLMP3_INT",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1101500",
+      "id": "1101500"
+    },
+    {
+      "name": "Inception.2010.RETAiL.HUN.PAL.DVD9-MWT",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1083156",
+      "id": "1083156"
+    },
+    {
+      "name": "Eredet",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1071456",
+      "id": "1071456"
+    },
+    {
+      "name": "Inception.2010.BDRip.x264.HUN-ZHR",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1070895",
+      "id": "1070895"
+    },
+    {
+      "name": "Warrior.2011.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=923392",
+      "id": "923392"
+    },
+    {
+      "name": "Hans Zimmer - Inception OST",
+      "url": "https://ncore.cc/torrents.php?action=details&id=772453",
+      "id": "772453"
+    }
+  ],
+  "shouldFindResultsInMultipleTorrentType-request": {
+    "uri": "https://ncore.cc/torrents.php",
+    "entity": {
+      "contentType": {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded"
+      },
+      "content": "kivalasztott_tipus%5B%5D=dvd_hun&kivalasztott_tipus%5B%5D=hd&mire=inception&tipus=kivalasztottak_kozott&miben=name&submit.x=0&submit.y=0&submit=Ok&tags="
+    },
+    "method": "POST",
+    "requestLine": {
+      "method": "POST",
+      "uri": "https://ncore.cc/torrents.php"
+    },
+    "protocolVersion": {
+      "protocol": "HTTP",
+      "major": 1,
+      "minor": 1
+    },
+    "allHeaders": [
+      {
+        "name": "accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+      },
+      {
+        "name": "accept-encoding",
+        "value": "gzip, deflate, br"
+      },
+      {
+        "name": "accept-language",
+        "value": "hu-HU,hu;q=0.8,en-US;q=0.6,en;q=0.4"
+      },
+      {
+        "name": "cache-control",
+        "value": "max-age=0"
+      },
+      {
+        "name": "content-type",
+        "value": "application/x-www-form-urlencoded"
+      },
+      {
+        "name": "origin",
+        "value": "https://ncore.cc"
+      },
+      {
+        "name": "upgrade-insecure-requests",
+        "value": "1"
+      },
+      {
+        "name": "user-agent",
+        "value": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+      },
+      {
+        "name": "referer",
+        "value": "https://ncore.cc/torrents.php"
+      }
+    ]
+  },
+  "shouldFindResultsInMultipleTorrentType-results": [
+    {
+      "name": "Inception.2010.iNTERNAL.BDRip.x264-REGRET",
+      "url": "https://ncore.cc/torrents.php?action=details&id=2009695",
+      "id": "2009695"
+    },
+    {
+      "name": "Oceans.11.2001.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1690281",
+      "id": "1690281"
+    },
+    {
+      "name": "Oceans.12.2004.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1690280",
+      "id": "1690280"
+    },
+    {
+      "name": "Oceans.13.2007.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1690279",
+      "id": "1690279"
+    },
+    {
+      "name": "Inception.RERiP.DVDRiP.XviD-ARROW ",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1643020",
+      "id": "1643020"
+    },
+    {
+      "name": "Fack.ju.Goehte.2013.German.AC3.BDRip.x264-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1554463",
+      "id": "1554463"
+    },
+    {
+      "name": "Inception.2010.RETAiL.HUN.PAL.DVDR-MWT",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1509182",
+      "id": "1509182"
+    },
+    {
+      "name": "Inception.German.2010.AC3.DVDRip.XviD-KiNOWELT",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1360451",
+      "id": "1360451"
+    },
+    {
+      "name": "Ghettogangz.2.Ultimatum.2009.German.AC3.DL.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1207382",
+      "id": "1207382"
+    },
+    {
+      "name": "Eredet",
+      "url": "https://ncore.cc/torrents.php?action=details&id=1071456",
+      "id": "1071456"
+    },
+    {
+      "name": "Warrior.2011.German.AC3.BDRip.XviD-iNCEPTiON",
+      "url": "https://ncore.cc/torrents.php?action=details&id=923392",
+      "id": "923392"
+    },
+    {
+      "name": "Eredet - Extra lemez",
+      "url": "https://ncore.cc/torrents.php?action=details&id=741494",
+      "id": "741494"
+    }
+  ],
+  "shouldFindTorrentDetails-request": {
+    "uri": "https://ncore.cc/torrents.php?action=details&id=2009695",
+    "method": "POST",
+    "requestLine": {
+      "method": "POST",
+      "uri": "https://ncore.cc/torrents.php?action=details&id=2009695",
+      "protocolVersion": {
+        "protocol": "HTTP",
+        "major": 1,
+        "minor": 1
+      }
+    },
+    "allHeaders": [
+      {
+        "name": "accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+      },
+      {
+        "name": "accept-encoding",
+        "value": "gzip, deflate, br"
+      },
+      {
+        "name": "accept-language",
+        "value": "hu-HU,hu;q=0.8,en-US;q=0.6,en;q=0.4"
+      },
+      {
+        "name": "cache-control",
+        "value": "max-age=0"
+      },
+      {
+        "name": "content-type",
+        "value": "application/x-www-form-urlencoded"
+      },
+      {
+        "name": "origin",
+        "value": "https://ncore.cc"
+      },
+      {
+        "name": "upgrade-insecure-requests",
+        "value": "1"
+      },
+      {
+        "name": "user-agent",
+        "value": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+      },
+      {
+        "name": "referer",
+        "value": "https://ncore.cc/torrents.php?action=details&id=2009695"
+      }
+    ],
+    "protocolVersion": {
+      "protocol": "HTTP",
+      "major": 1,
+      "minor": 1
+    }
+  },
+  "shouldFindTorrentDetails-result": {
+    "uploadDate": "2016-07-25T18:00:29.000+0000",
+    "uploader": "Anonymous",
+    "commentCount": "2 db",
+    "seederCount": "72",
+    "leecherCount": "0",
+    "downloadCount": "++",
+    "speed": "0 B/s (becsült)",
+    "size": "965.06 MB (1011940950 bájt)",
+    "fileCount": "2",
+    "description": "Eredeti release! Inception.2010.iNTERNAL.BDRip.x264-REGRET Két ifjú és ambiciózus építész együtt dolgozik, s nem csak kollégák, hanem a legjobb barátok is, ám kapcsolatukra némi árnyék vetül. A vállalatnál kifejlesztettek egy olyan technológiát, amely segítségével be lehet lépni az álmokba, és bizonyos emberek fejéből így információhoz lehet jutni. Amikor Cobb él ezzel a lehetőséggel, a dolgok egyre bonyolultabbakká válnak... Eredet (Inception) - Magyar Szinkronos Előzetes https://www.youtube.com/watch?v=Ypu8DP2ci-M",
+    "infoBarTitle": "Eredet (Inception)",
+    "releaseDate": "2010",
+    "director": "Christopher Nolan",
+    "actors": "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy, Ken Watanabe",
+    "country": "USA, UK",
+    "length": "148 perc",
+    "tags": "akció, kaland, sci-fi, thriller",
+    "imdbRating": "8.8",
+    "imdbURL": "http://hungarian.imdb.com/title/tt1375666",
+    "otherURL": "http://www.filmkatalogus.hu/Er...",
+    "mafabURL": "http://www.mafab.hu/movies/ere..."
+  },
+  "shouldDownloadTorrent-request": {
+    "uri": "https://ncore.cc/torrents.php?action=download&id=2009695",
+    "method": "GET",
+    "requestLine": {
+      "method": "GET",
+      "uri": "https://ncore.cc/torrents.php?action=download&id=2009695",
+      "protocolVersion": {
+        "protocol": "HTTP",
+        "major": 1,
+        "minor": 1
+      }
+    },
+    "protocolVersion": {
+      "protocol": "HTTP",
+      "major": 1,
+      "minor": 1
+    },
+    "allHeaders": []
+  }
+}
