@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/akosbordas/ncore-client.svg?branch=master)](https://travis-ci.org/akosbordas/ncore-client)
 
+[![Coverage Status](https://coveralls.io/repos/github/akosbordas/ncore-client/badge.svg?branch=master)](https://coveralls.io/github/akosbordas/ncore-client?branch=master)
+
 NcoreClient is a Java client for [https://ncore.cc](https://ncore.cc) torrent site. This library makes it easy to automate your torrent downloads, searches from any Java program based on your needs. Ncore is a restricted site. You need to have an account on the site to use this client.
 <!---
 ### Getting started
