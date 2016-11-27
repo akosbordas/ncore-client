@@ -32,10 +32,11 @@ public class TorrentListElement {
 
     @Override
     public String toString() {
-        return "\nTorrentListElement{" +
-                "name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("TorrentListElement{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", url='").append(url).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     @Override

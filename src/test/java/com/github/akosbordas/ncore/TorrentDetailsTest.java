@@ -210,6 +210,15 @@ public class TorrentDetailsTest extends TestBase {
     }
 
     @Test
+    public void shouldHaveProperEqualMethods() throws Exception {
+        String html = readFile("mobile-program-torrent-type.html");
+        TorrentType torrentType = torrentDetails.parseType(html);
+        TorrentType torrentType2 = torrentDetails.parseType(html);
+        assertThat(torrentType).isEqualTo(torrentType2);
+        assertThat(torrentType.hashCode()).isEqualTo(torrentType2.hashCode());
+    }
+
+    @Test
     public void shouldParseMovieCustomTorrentDetails() throws IOException {
         MovieTorrentDetails movieTorrentDetails = new MovieTorrentDetails();
         movieTorrentDetails.customParse(TorrentDetails.parseHtml(readFile("movie-custom-torrent-details.html")));
