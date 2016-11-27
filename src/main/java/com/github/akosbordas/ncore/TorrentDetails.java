@@ -6,11 +6,15 @@ import org.jsoup.nodes.Document;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public abstract class TorrentDetails {
 
     protected Date uploadDate;
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    {
+        DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("Europe/Budapest"));
+    }
 
     protected String uploader;
     protected String commentCount;
