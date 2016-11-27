@@ -31,7 +31,7 @@ import static org.mockito.Mockito.*;
 
 public class DefaultNcoreClientTest extends IntegrationTestBase {
 
-    public static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
+    public static final String TEMP_DIR = System.getProperty("java.io.tmpdir") + "/";
 
     public static final Path DOWNLOADED_FILE_PATH =
         Paths.get(TEMP_DIR, "[nCore][xvid_hun]Inception.2010.BDRip.Xvid.Hun-PpB.torrent");
