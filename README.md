@@ -36,7 +36,7 @@ CredentialsProvider.setPassword("yourPassword");
 NcoreClient client = new DefaultNcoreClient();
 ```
 
-The other option to instantiate your client by setting username and password directly in it's constructor:
+The other option to instantiate your client by setting username and password directly by it's constructor:
 
 ```java
 NcoreClient client = new DefaultNcoreClient("username", "password");
@@ -57,7 +57,7 @@ client.search("Inception.2010.iNTERNAL.BDRip.x264-REGRET");
 client.search("Inception.2010.iNTERNAL.BDRip.x264-REGRET", new TorrentTypeCriterion(TorrentType.MOVIE_HD), new TorrentTypeCriterion(TorrentType.MOVIE_SD) /* ... and many more criteria */);
 ```
 
-... or if varargs does not fit to your needs than you can pass a list of criteria as well:
+... or if varargs does not fit to your needs than you can pass a list of criterion as well:
 
 ```java
 List<TorrentTypeCriterion> criteria = new ArrayList<>();
@@ -79,7 +79,7 @@ TorrentType type = MOVIE_DVD;
 type.setEnglish(true);
 new TorrentTypeCriterion(type);
 ```
-..or if you want to simplify this you can use the `*En` static methods from the `CriteriaFactory`.
+... or if you want to simplify this you can use the `*En` static methods from the `CriteriaFactory`.
 
 #### Search results
 
@@ -98,15 +98,15 @@ If you want to get more detailed information about a torrent, you can use the `g
 ```java
 TorrentListElement torrentListElement = searchResult.get(0);
 TorrentDetails torrentDetails = client.getTorrentDetails(torrentListElement.getId());
-torrentDetails.getDescription(); // access to detailed torrent informations such as description 
+torrentDetails.getDescription(); // access to detailed torrent information such as description
 ``` 
 It's up to you which torrent details you are interested in. You can iterate through all the search results and query them one-by-one if you want. I didn't do that by default because it is not necessary every time and it could be a bit time consuming process.
 
-There are `TorrentDetails` implementations for each `TorrentTypes`. These contain type specific informations based on the type. If you are interested in the properties you can access, just check the fields in `*TorrentDetails` classes. You can find the general properites in the `TorrentDetails` class itself.
+There are `TorrentDetails` implementations for each `TorrentTypes`. These contain type specific information depends on the type. If you are interested in the properties you can access, just check the fields in `*TorrentDetails` classes. The general properties are placed in the `TorrentDetails` class itself.
 
 #### Download torrents
 
-Finally you can download the `.torrent` file if you want. You only need to specify the `id` and and a `path` where you want to save it.
+Finally you can download the `.torrent` file as well. You only need to specify the `id` and and a `path` where you want to save it.
 After it is downloaded you can schedule it in your favorite torrent client (eg.: uTorrent) for auto download or anything you want. :)
 
 ```java
