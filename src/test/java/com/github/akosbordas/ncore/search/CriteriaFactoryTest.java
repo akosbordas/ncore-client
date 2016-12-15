@@ -26,7 +26,7 @@ public class CriteriaFactoryTest {
     public void testSdMovieEn() throws Exception {
         TorrentType type = MOVIE_SD;
         type.setEnglish(true);
-        assertThat(sdMovie()).isEqualTo(new TorrentTypeCriterion(type));
+        assertThat(sdMovieEn()).isEqualTo(new TorrentTypeCriterion(type));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class CriteriaFactoryTest {
     public void testDvdMovieEn() throws Exception {
         TorrentType type = MOVIE_DVD;
         type.setEnglish(true);
-        assertThat(dvdMovie()).isEqualTo(new TorrentTypeCriterion(type));
+        assertThat(dvdMovieEn()).isEqualTo(new TorrentTypeCriterion(type));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class CriteriaFactoryTest {
     public void testDvd9MovieEn() throws Exception {
         TorrentType type = MOVIE_DVD9;
         type.setEnglish(true);
-        assertThat(dvd9Movie()).isEqualTo(new TorrentTypeCriterion(type));
+        assertThat(dvd9MovieEn()).isEqualTo(new TorrentTypeCriterion(type));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class CriteriaFactoryTest {
     public void testHdMovieEn() throws Exception {
         TorrentType type = MOVIE_HD;
         type.setEnglish(true);
-        assertThat(hdMovie()).isEqualTo(new TorrentTypeCriterion(type));
+        assertThat(hdMovieEn()).isEqualTo(new TorrentTypeCriterion(type));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class CriteriaFactoryTest {
     public void testSdSeriesEn() throws Exception {
         TorrentType type = SERIES_SD;
         type.setEnglish(true);
-        assertThat(sdSeries()).isEqualTo(new TorrentTypeCriterion(type));
+        assertThat(sdSeriesEn()).isEqualTo(new TorrentTypeCriterion(type));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class CriteriaFactoryTest {
     public void testDvdSeriesEn() throws Exception {
         TorrentType type = SERIES_DVD;
         type.setEnglish(true);
-        assertThat(dvdSeries()).isEqualTo(new TorrentTypeCriterion(type));
+        assertThat(dvdSeriesEn()).isEqualTo(new TorrentTypeCriterion(type));
     }
 
     @Test
