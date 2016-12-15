@@ -26,6 +26,29 @@ public class TorrentTypeCriterion implements SearchCriterion {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TorrentTypeCriterion)) {
+            return false;
+        }
+
+        TorrentTypeCriterion that = (TorrentTypeCriterion) o;
+
+        if (torrentType != that.torrentType) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return torrentType != null ? torrentType.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TorrentTypeCriterion{");
         sb.append("torrentType=").append(torrentType);

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
+import static com.github.akosbordas.ncore.search.CriteriaFactory.*;
 import static com.google.common.base.Throwables.propagate;
 
 public class Main {
@@ -21,7 +22,7 @@ public class Main {
 
         NcoreClient client = new DefaultNcoreClient();
 
-        List<TorrentListElement> searchResult = client.search("inception", new TorrentTypeCriterion(TorrentType.MOVIE_SD));
+        List<TorrentListElement> searchResult = client.search("inception", sdMovie(), sdMovieEn(), hdMovie(), hdMovieEn());
         TorrentListElement torrentListElement = searchResult.get(0);
 
         TorrentDetails torrentDetails = client.getTorrentDetails(torrentListElement.getId());
