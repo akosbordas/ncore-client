@@ -15,5 +15,12 @@ public class TorrentListElementTest {
         assertThat(listElement.getUrl()).isEqualTo("https://ncore.cc/torrents.php?action=details&id=2009695");
         assertThat(listElement).isEqualTo(listElement2);
         assertThat(listElement.hashCode()).isEqualTo(listElement2.hashCode());
+
+        listElement = new TorrentListElement("Inception.2010.iNTERNAL.BDRip.x264-REGRET", "torrents.php?action=details&id=2009695");
+        listElement.setName("changed");
+        listElement.setUrl("torrents.php?action=details&id=test");
+        assertThat(listElement.getName()).isEqualTo("changed");
+        assertThat(listElement.getId()).isEqualTo("test");
+        assertThat(listElement.getUrl()).isEqualTo("https://ncore.cc/torrents.php?action=details&id=test");
     }
 }
