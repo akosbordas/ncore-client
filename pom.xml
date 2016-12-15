@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.akosbordas</groupId>
     <artifactId>ncore-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
+    <description>
+        NcoreClient is a Java client for https://ncore.cc torrent site.
+        This library makes it easy to automate your torrent downloads, searches from any Java program based on your needs.
+    </description>
+
+    <developers>
+        <developer>
+            <id>akos</id>
+            <name>Akos Bordas</name>
+            <email>akos.bordas@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:akosbordas/ncore-client.git</connection>
+        <url>scm:git:git@github.com:akosbordas/ncore-client.git</url>
+        <developerConnection>scm:git:git@github.com:akosbordas/ncore-client.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <dependencies>
 
