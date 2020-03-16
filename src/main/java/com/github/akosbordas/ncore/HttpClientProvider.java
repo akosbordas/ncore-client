@@ -49,7 +49,7 @@ public class HttpClientProvider {
 
     private static HttpClient createHttpClient() {
         SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(getSslContext(),
-                                                                                               new String[] {"TLSv1",
+                                                                                               new String[] {"TLSv1.2",
                                                                                                              "SSLv3"},
                                                                                                null,
                                                                                                SSLConnectionSocketFactory
