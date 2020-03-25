@@ -7,213 +7,127 @@ import static com.github.akosbordas.ncore.TorrentType.*;
 public class CriteriaFactory {
 
     public static TorrentTypeCriterion sdMovie() {
-        return new TorrentTypeCriterion(MOVIE_SD);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_SD, false));
     }
 
     public static TorrentTypeCriterion sdMovieEn() {
-        TorrentType type = MOVIE_SD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_SD, true));
     }
 
     public static TorrentTypeCriterion dvdMovie() {
-        return new TorrentTypeCriterion(MOVIE_DVD);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_DVD, false));
     }
 
     public static TorrentTypeCriterion dvdMovieEn() {
-        TorrentType type = MOVIE_DVD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_DVD, true));
     }
 
     public static TorrentTypeCriterion dvd9Movie() {
-        return new TorrentTypeCriterion(MOVIE_DVD9);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_DVD9, false));
     }
 
     public static TorrentTypeCriterion dvd9MovieEn() {
-        TorrentType type = MOVIE_DVD9;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_DVD9, true));
     }
 
     public static TorrentTypeCriterion hdMovie() {
-        return new TorrentTypeCriterion(TorrentType.MOVIE_HD);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_HD, false));
     }
 
     public static TorrentTypeCriterion hdMovieEn() {
-        TorrentType type = TorrentType.MOVIE_HD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(MOVIE_HD, true));
     }
 
     public static TorrentTypeCriterion sdSeries() {
-        return new TorrentTypeCriterion(SERIES_SD);
+        return new TorrentTypeCriterion(new TorrentType(SERIES_SD, false));
     }
 
     public static TorrentTypeCriterion sdSeriesEn() {
-        TorrentType type = SERIES_SD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(SERIES_SD, true));
     }
 
     public static TorrentTypeCriterion dvdSeries() {
-        return new TorrentTypeCriterion(SERIES_DVD);
+        return new TorrentTypeCriterion(new TorrentType(SERIES_DVD, false));
     }
 
     public static TorrentTypeCriterion dvdSeriesEn() {
-        TorrentType type = SERIES_DVD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(SERIES_DVD, true));
     }
 
     public static TorrentTypeCriterion hdSeries() {
-        return new TorrentTypeCriterion(SERIES_HD);
+        return new TorrentTypeCriterion(new TorrentType(SERIES_HD, false));
     }
 
     public static TorrentTypeCriterion hdSeriesEn() {
-        TorrentType type = SERIES_HD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(SERIES_HD, true));
     }
 
     public static TorrentTypeCriterion mp3Music() {
-        return new TorrentTypeCriterion(MUSIC_MP3);
+        return new TorrentTypeCriterion(new TorrentType(MUSIC_MP3, false));
     }
 
     public static TorrentTypeCriterion mp3MusicEn() {
-        TorrentType type = MUSIC_MP3;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(MUSIC_MP3, true));
     }
 
     public static TorrentTypeCriterion losslessMusic() {
-        return new TorrentTypeCriterion(MUSIC_LOSSLESS);
+        return new TorrentTypeCriterion(new TorrentType(MUSIC_LOSSLESS, false));
     }
 
     public static TorrentTypeCriterion losslessMusicEn() {
-        TorrentType type = MUSIC_LOSSLESS;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(MUSIC_LOSSLESS, true));
     }
 
     public static TorrentTypeCriterion musicClip() {
-        return new TorrentTypeCriterion(MUSIC_CLIP);
-    }
-
-    public static TorrentTypeCriterion musicClipEn() {
-        TorrentType type = MUSIC_CLIP;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(MUSIC_CLIP, true));
     }
 
     public static TorrentTypeCriterion isoGame() {
-        return new TorrentTypeCriterion(GAME_ISO);
-    }
-
-    public static TorrentTypeCriterion isoGameEn() {
-        TorrentType type = GAME_ISO;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(GAME_ISO, true));
     }
 
     public static TorrentTypeCriterion ripGame() {
-        return new TorrentTypeCriterion(GAME_RIP);
-    }
-
-    public static TorrentTypeCriterion ripGameEn() {
-        TorrentType type = GAME_RIP;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(GAME_RIP, true));
     }
 
     public static TorrentTypeCriterion consoleGame() {
-        return new TorrentTypeCriterion(GAME_CONSOLE);
-    }
-
-    public static TorrentTypeCriterion consoleGameEn() {
-        TorrentType type = GAME_CONSOLE;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(GAME_CONSOLE, true));
     }
 
     public static TorrentTypeCriterion ebook() {
-        return new TorrentTypeCriterion(E_BOOK);
+        return new TorrentTypeCriterion(new TorrentType(E_BOOK, false));
     }
 
     public static TorrentTypeCriterion ebookEn() {
-        TorrentType type = E_BOOK;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(E_BOOK, true));
     }
 
     public static TorrentTypeCriterion ripProgram() {
-        return new TorrentTypeCriterion(PROGRAM_RIP);
-    }
-
-    public static TorrentTypeCriterion ripProgramEn() {
-        TorrentType type = PROGRAM_RIP;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(PROGRAM_RIP, true));
     }
 
     public static TorrentTypeCriterion isoProgram() {
-        return new TorrentTypeCriterion(PROGRAM_ISO);
-    }
-
-    public static TorrentTypeCriterion isoProgramEn() {
-        TorrentType type = PROGRAM_ISO;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(PROGRAM_ISO, true));
     }
 
     public static TorrentTypeCriterion mobileProgram() {
-        return new TorrentTypeCriterion(PROGRAM_MOBILE);
-    }
-
-    public static TorrentTypeCriterion mobileProgramEn() {
-        TorrentType type = PROGRAM_MOBILE;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(PROGRAM_MOBILE, true));
     }
 
     public static TorrentTypeCriterion sdXxx() {
-        return new TorrentTypeCriterion(XXX_SD);
-    }
-
-    public static TorrentTypeCriterion sdXxxEn() {
-        TorrentType type = XXX_SD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(XXX_SD, true));
     }
 
     public static TorrentTypeCriterion dvdXxx() {
-        return new TorrentTypeCriterion(XXX_DVD);
-    }
-
-    public static TorrentTypeCriterion dvdXxxEn() {
-        TorrentType type = XXX_DVD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(XXX_DVD, true));
     }
 
     public static TorrentTypeCriterion imageSetXxx() {
-        return new TorrentTypeCriterion(XXX_IMAGESET);
-    }
-
-    public static TorrentTypeCriterion imageSetXxxEn() {
-        TorrentType type = XXX_IMAGESET;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(XXX_IMAGESET, true));
     }
 
     public static TorrentTypeCriterion hdXxx() {
-        return new TorrentTypeCriterion(XXX_HD);
-    }
-
-    public static TorrentTypeCriterion hdXxxEn() {
-        TorrentType type = XXX_HD;
-        type.setEnglish(true);
-        return new TorrentTypeCriterion(type);
+        return new TorrentTypeCriterion(new TorrentType(XXX_HD, true));
     }
 
 }

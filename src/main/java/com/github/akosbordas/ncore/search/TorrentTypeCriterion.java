@@ -36,16 +36,12 @@ public class TorrentTypeCriterion implements SearchCriterion {
 
         TorrentTypeCriterion that = (TorrentTypeCriterion) o;
 
-        if (torrentType != that.torrentType) {
-            return false;
-        }
-
-        return true;
+        return torrentType.equals(that.torrentType);
     }
 
     @Override
     public int hashCode() {
-        return torrentType != null ? torrentType.hashCode() : 0;
+        return torrentType != null ? torrentType.getSearchValue().hashCode() : 0;
     }
 
     @Override

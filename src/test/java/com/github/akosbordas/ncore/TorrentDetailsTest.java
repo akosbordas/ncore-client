@@ -69,13 +69,6 @@ public class TorrentDetailsTest extends TestBase {
 
     }
 
-    @Test
-    public void shouldPassIfParsedLanguageCorrectly() throws IOException {
-        String html = readFile("torrent-details-language-parse.html");
-        assertTrue(torrentDetails.parseType(html).isEnglish());
-
-    }
-
     @Test(expected = TorrentDetailsParseException.class)
     public void shouldPassIfThrowsExceptionOnTypeParse() throws IOException {
         String html = readFile("torrent-details-parse-type-throw-exception.html");
@@ -208,7 +201,7 @@ public class TorrentDetailsTest extends TestBase {
         String html = readFile("mobile-program-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_MOBILE);
     }
-
+/*
     @Test
     public void shouldHaveProperEqualMethods() throws Exception {
         String html = readFile("mobile-program-torrent-type.html");
@@ -216,7 +209,7 @@ public class TorrentDetailsTest extends TestBase {
         TorrentType torrentType2 = torrentDetails.parseType(html);
         assertThat(torrentType).isEqualTo(torrentType2);
         assertThat(torrentType.hashCode()).isEqualTo(torrentType2.hashCode());
-    }
+    }*/
 
     @Test
     public void shouldParseMovieCustomTorrentDetails() throws IOException {
