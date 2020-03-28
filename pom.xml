@@ -11,6 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <gpg.keyname>77FD6001ED4E4592541A87BDC7C4644BE42450B9</gpg.keyname>
     </properties>
 
     <description>
@@ -143,9 +144,6 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
-                                <configuration>
-                                    <keyname>77FD6001ED4E4592541A87BDC7C4644BE42450B9</keyname>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
