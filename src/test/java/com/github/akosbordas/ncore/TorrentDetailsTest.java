@@ -201,15 +201,6 @@ public class TorrentDetailsTest extends TestBase {
         String html = readFile("mobile-program-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_MOBILE);
     }
-/*
-    @Test
-    public void shouldHaveProperEqualMethods() throws Exception {
-        String html = readFile("mobile-program-torrent-type.html");
-        TorrentType torrentType = torrentDetails.parseType(html);
-        TorrentType torrentType2 = torrentDetails.parseType(html);
-        assertThat(torrentType).isEqualTo(torrentType2);
-        assertThat(torrentType.hashCode()).isEqualTo(torrentType2.hashCode());
-    }*/
 
     @Test
     public void shouldParseMovieCustomTorrentDetails() throws IOException {
