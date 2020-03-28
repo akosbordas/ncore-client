@@ -28,6 +28,6 @@ public class TorrentTypeCriterionTest {
         assertThat(type1).isNotEqualTo(type4);
         assertThat(type1).isNotEqualTo(new Object());
 
-
+        assertThat(new TorrentTypeCriterion(null)).isEqualTo(new TorrentTypeCriterion(null));
     }
 }

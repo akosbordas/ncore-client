@@ -3,6 +3,7 @@ package com.github.akosbordas.ncore.search;
 import com.github.akosbordas.ncore.TorrentType;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -27,21 +28,15 @@ public class TorrentTypeCriterion implements SearchCriterion {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof TorrentTypeCriterion)) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         TorrentTypeCriterion that = (TorrentTypeCriterion) o;
-
-        return torrentType.equals(that.torrentType);
+        return Objects.equals(torrentType, that.torrentType);
     }
 
     @Override
     public int hashCode() {
-        return torrentType != null ? torrentType.getSearchValue().hashCode() : 0;
+        return Objects.hash(torrentType);
     }
 
     @Override
