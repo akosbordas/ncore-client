@@ -54,15 +54,15 @@ client.search("Inception.2010.iNTERNAL.BDRip.x264-REGRET");
 * Search by term and use filter for torrent types. You can specify any number of torrent types using the method with varargs.  
 
 ```java
-client.search("Inception.2010.iNTERNAL.BDRip.x264-REGRET", new TorrentTypeCriterion(TorrentType.MOVIE_HD), new TorrentTypeCriterion(TorrentType.MOVIE_SD) /* ... and many more criteria */);
+client.search("Inception.2010.iNTERNAL.BDRip.x264-REGRET", new TorrentTypeCriterion(new TorrentType(TorrentType.MOVIE_HD)), new TorrentTypeCriterion(new TorrentType(TorrentType.MOVIE_SD)) /* ... and many more criteria */);
 ```
 
 ... or if varargs does not fit to your needs than you can pass a list of criterion as well:
 
 ```java
 List<TorrentTypeCriterion> criteria = new ArrayList<>();
-criteria.add(new TorrentTypeCriterion(TorrentType.MOVIE_HD));
-criteria.add(new TorrentTypeCriterion(TorrentType.MOVIE_SD));
+criteria.add(new TorrentTypeCriterion(new TorrentType(TorrentType.MOVIE_HD)));
+criteria.add(new TorrentTypeCriterion(new TorrentType(TorrentType.MOVIE_SD)));
 /* ... and many more criteria */
 client.search("Inception.2010.iNTERNAL.BDRip.x264-REGRET", criteria);
 ```
@@ -73,10 +73,15 @@ If you don't like to write too much I have written some static factory methods t
 client.search("Inception.2010.iNTERNAL.BDRip.x264-REGRET", hdMovie(), sdMovie());
 ```
     
-All searches will be performed with Hungarian language by default, however you can search in english torrent types as well. You only need to set the english flag in the torrent type enum value:
+All searches will be performed with Hungarian language by default, however you can search in english torrent types as well. You only need to set the english flag in the torrent type:
 ```java
-TorrentType type = MOVIE_DVD;
+TorrentType type = new TorrentType(TorrentType.MOVIE_DVD);
 type.setEnglish(true);
+new TorrentTypeCriterion(type);
+```
+You can also use the constructor to set the english flag:
+```java
+TorrentType type = new TorrentType(TorrentType.MOVIE_DVD, true);
 new TorrentTypeCriterion(type);
 ```
 ... or if you want to simplify this you can use the `*En` static methods from the `CriteriaFactory`.
