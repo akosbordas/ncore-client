@@ -1,5 +1,7 @@
 package com.github.akosbordas.ncore;
 
+import java.util.Objects;
+
 public class TorrentType {
 
     public static final String MOVIE_SD = "xvid";
@@ -57,11 +59,16 @@ public class TorrentType {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof TorrentType)) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TorrentType that = (TorrentType) o;
+        return english == that.english &&
+                Objects.equals(searchValue, that.searchValue);
+    }
 
-        TorrentType other = (TorrentType) obj;
-
-        return (getSearchValue().equals(other.getSearchValue()) && isEnglish() == other.isEnglish());
+    @Override
+    public int hashCode() {
+        return Objects.hash(searchValue, english);
     }
 }

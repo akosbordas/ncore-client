@@ -139,4 +139,9 @@ public class TorrentTypeTest {
         movieSd.setEnglish(true);
         assertThat(movieSd.isEnglish()).isTrue();
     }
+
+    @Test
+    public void equalsShouldBeCorrect() {
+        assertThat(new TorrentType(null, false)).isEqualTo(new TorrentType(null, false));
+    }
 }
