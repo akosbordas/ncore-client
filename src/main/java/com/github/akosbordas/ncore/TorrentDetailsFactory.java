@@ -23,6 +23,7 @@ import com.github.akosbordas.ncore.xxx.ImagesetXxxTorrentDetails;
 import com.github.akosbordas.ncore.xxx.SdXxxTorrentDetails;
 
 import static com.github.akosbordas.ncore.TorrentDetails.parseType;
+import static com.github.akosbordas.ncore.TorrentType.*;
 
 public class TorrentDetailsFactory {
 
@@ -37,7 +38,7 @@ public class TorrentDetailsFactory {
 
     public TorrentDetails create(String document) {
 
-        TorrentType type = parseType(document);
+        String type = parseType(document);
 
         switch (type) {
             case MOVIE_SD:

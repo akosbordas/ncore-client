@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static com.github.akosbordas.ncore.TorrentType.MOVIE_DVD;
+import static com.github.akosbordas.ncore.TorrentType.MOVIE_HD;
 import static ie.corballis.fixtures.assertion.FixtureAssert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -81,11 +82,11 @@ public class DefaultNcoreClientTest extends IntegrationTestBase {
         HttpResponse httpResponse = mockHttpResponse(200, readFile("torrent-list-with-type-filters.html"));
         when(httpClient.execute(any(HttpGet.class))).thenReturn(httpResponse);
 
-        TorrentType englishMovie = TorrentType.MOVIE_HD;
+        TorrentType englishMovie = new TorrentType(MOVIE_HD, true);
         englishMovie.setEnglish(true);
 
         List<TorrentListElement> results = ncoreClient.search("inception",
-                                                              new TorrentTypeCriterion(MOVIE_DVD),
+                                                              new TorrentTypeCriterion(new TorrentType(MOVIE_DVD)),
                                                               new TorrentTypeCriterion(englishMovie));
         verify(loginService, times(1)).login(eq("username"), eq("password"));
 

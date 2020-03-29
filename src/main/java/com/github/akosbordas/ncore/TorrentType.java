@@ -1,134 +1,42 @@
 package com.github.akosbordas.ncore;
 
-public enum TorrentType {
-    MOVIE_SD {
-        @Override
-        public String getSearchValue() {
-            return "xvid";
-        }
-    },
-    MOVIE_DVD {
-        @Override
-        public String getSearchValue() {
-            return "dvd";
-        }
-    },
-    MOVIE_DVD9 {
-        @Override
-        public String getSearchValue() {
-            return "dvd9";
-        }
-    },
-    MOVIE_HD {
-        @Override
-        public String getSearchValue() {
-            return "hd";
-        }
-    },
-    SERIES_SD {
-        @Override
-        public String getSearchValue() {
-            return "xvidser";
-        }
-    },
-    SERIES_DVD {
-        @Override
-        public String getSearchValue() {
-            return "dvdser";
-        }
-    },
-    SERIES_HD {
-        @Override
-        public String getSearchValue() {
-            return "hdser";
-        }
-    },
-    MUSIC_MP3 {
-        @Override
-        public String getSearchValue() {
-            return "mp3";
-        }
-    },
-    MUSIC_LOSSLESS {
-        @Override
-        public String getSearchValue() {
-            return "lossless";
-        }
-    },
-    MUSIC_CLIP {
-        @Override
-        public String getSearchValue() {
-            return "clip";
-        }
-    },
-    GAME_ISO {
-        @Override
-        public String getSearchValue() {
-            return "game_iso";
-        }
-    },
-    GAME_RIP {
-        @Override
-        public String getSearchValue() {
-            return "game_rip";
-        }
-    },
-    GAME_CONSOLE {
-        @Override
-        public String getSearchValue() {
-            return "console";
-        }
-    },
-    E_BOOK {
-        @Override
-        public String getSearchValue() {
-            return "ebook";
-        }
-    },
-    PROGRAM_RIP {
-        @Override
-        public String getSearchValue() {
-            return "misc";
-        }
-    },
-    PROGRAM_ISO {
-        @Override
-        public String getSearchValue() {
-            return "iso";
-        }
-    },
-    PROGRAM_MOBILE {
-        @Override
-        public String getSearchValue() {
-            return "mobil";
-        }
-    },
-    XXX_SD {
-        @Override
-        public String getSearchValue() {
-            return "xxx_xvid";
-        }
-    },
-    XXX_DVD {
-        @Override
-        public String getSearchValue() {
-            return "xxx_dvd";
-        }
-    },
-    XXX_IMAGESET {
-        @Override
-        public String getSearchValue() {
-            return "xxx_imageset";
-        }
-    },
-    XXX_HD {
-        @Override
-        public String getSearchValue() {
-            return "xxx_hd";
-        }
-    };
+import java.util.Objects;
 
+public class TorrentType {
+
+    public static final String MOVIE_SD = "xvid";
+    public static final String MOVIE_DVD = "dvd";
+    public static final String MOVIE_DVD9 = "dvd9";
+    public static final String MOVIE_HD = "hd";
+    public static final String SERIES_SD = "xvidser";
+    public static final String SERIES_DVD = "dvdser";
+    public static final String SERIES_HD = "hdser";
+    public static final String MUSIC_MP3 = "mp3";
+    public static final String MUSIC_LOSSLESS = "lossless";
+    public static final String MUSIC_CLIP = "clip";
+    public static final String GAME_ISO = "game_iso";
+    public static final String GAME_RIP = "game_rip";
+    public static final String GAME_CONSOLE = "console";
+    public static final String E_BOOK = "ebook";
+    public static final String PROGRAM_RIP = "misc";
+    public static final String PROGRAM_ISO = "iso";
+    public static final String PROGRAM_MOBILE = "mobil";
+    public static final String XXX_SD = "xxx_xvid";
+    public static final String XXX_DVD = "xxx_dvd";
+    public static final String XXX_IMAGESET = "xxx_imageset";
+    public static final String XXX_HD = "xxx_hd";
+
+    private String searchValue;
     private boolean english;
+
+    public TorrentType(String searchValue) {
+        this.searchValue = searchValue;
+    }
+
+    public TorrentType(String searchValue, boolean english) {
+        this.searchValue = searchValue;
+        this.english = english;
+    }
 
     public boolean isEnglish() {
         return english;
@@ -138,9 +46,29 @@ public enum TorrentType {
         this.english = english;
     }
 
+    public String getSearchValue() {
+        return searchValue;
+    }
+
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
+    }
+
     public String getSearchKeyForType() {
         return "kivalasztott_tipus[]";
     }
 
-    public abstract String getSearchValue();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TorrentType that = (TorrentType) o;
+        return english == that.english &&
+                Objects.equals(searchValue, that.searchValue);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(searchValue, english);
+    }
 }

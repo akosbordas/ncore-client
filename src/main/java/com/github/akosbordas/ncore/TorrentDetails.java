@@ -66,14 +66,12 @@ public abstract class TorrentDetails {
 
     public abstract void customParse(Document document);
 
-    public static TorrentType parseType(String html) {
+    public static String parseType(String html) {
         Document document = parseHtml(html);
 
         String typeString = document.select("div.torrent_reszletek > div.torrent_col1 div:nth-child(2)").text();
 
-        boolean isEnglish = typeString.contains("EN");
-        TorrentType type;
-
+        String type;
 
         if (typeString.contains("Film") && typeString.contains("SD")) {
             type = TorrentType.MOVIE_SD;
@@ -120,8 +118,7 @@ public abstract class TorrentDetails {
         } else {
             throw new TorrentDetailsParseException("Couldn't parse torrent type");
         }
-
-        type.setEnglish(isEnglish);
+        
         return type;
     }
 
