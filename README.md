@@ -12,7 +12,7 @@ To setup library in your project you can use `maven` artifact by adding the foll
 <dependency>
   <groupId>com.github.akosbordas</groupId>
   <artifactId>ncore-client</artifactId>
-  <version>1.0.0-RC1</version>
+  <version>1.0.0-RC3</version>
 </dependency>
 ```
 
