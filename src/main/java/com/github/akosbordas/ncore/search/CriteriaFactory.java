@@ -130,4 +130,24 @@ public class CriteriaFactory {
         return new TorrentTypeCriterion(new TorrentType(XXX_HD, true));
     }
 
+    public static SearchInCriterion searchInName() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_NAME);
+    }
+
+    public static SearchInCriterion searchInDescription() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_DESCRIPTION);
+    }
+
+    public static SearchInCriterion searchInImdb() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_IMDB);
+    }
+
+    public static SearchInCriterion searchInUploader() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_UPLOADER);
+    }
+
+    public static SearchInCriterion searchInLabel() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_LABEL);
+    }
+
 }

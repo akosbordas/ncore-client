@@ -3,6 +3,7 @@ package com.github.akosbordas.ncore;
 import com.github.akosbordas.ncore.authentication.CredentialsProvider;
 import com.github.akosbordas.ncore.authentication.LoginService;
 import com.github.akosbordas.ncore.search.SearchCriterion;
+import com.github.akosbordas.ncore.search.SearchInCriterion;
 import com.github.akosbordas.ncore.search.TextSearchCriterion;
 import com.github.akosbordas.ncore.search.TorrentTypeCriterion;
 import org.apache.commons.io.IOUtils;
@@ -52,7 +53,10 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
     }
 
     public List<TorrentListElement> search(String term) throws IOException {
-        return search(newArrayList(new TextSearchCriterion(term)));
+        return search(newArrayList(
+                new TextSearchCriterion(term),
+                new SearchInCriterion(SearchInCriterion.SEARCH_IN_NAME)
+        ));
     }
 
     private List<TorrentListElement> search(List<? extends SearchCriterion> criteria) throws IOException {
@@ -86,7 +90,6 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
         }
 
         // TODO remove unnecessary parts when this method is finalized
-        searchFromList.add(new BasicNameValuePair("miben", "name"));
         searchFromList.add(new BasicNameValuePair("submit.x", "0"));
         searchFromList.add(new BasicNameValuePair("submit.y", "0"));
         searchFromList.add(new BasicNameValuePair("submit", "Ok"));
@@ -124,6 +127,19 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
         if (criteria == null) {
             criteria = newArrayList();
         }
+
+        boolean hasSearchInCriteria = false;
+        for(int i = 0; i < criteria.size(); i++) {
+            SearchCriterion criterion = criteria.get(i);
+
+            if(criterion instanceof SearchInCriterion) {
+                if(hasSearchInCriteria) criteria.remove(i);
+                else hasSearchInCriteria = true;
+            }
+        }
+
+        if(!hasSearchInCriteria)
+            criteria.add(new SearchInCriterion(SearchInCriterion.SEARCH_IN_NAME));
 
         criteria.add(new TextSearchCriterion(term));
         return search(criteria);
