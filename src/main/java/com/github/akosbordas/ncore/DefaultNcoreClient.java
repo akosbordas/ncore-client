@@ -2,10 +2,7 @@ package com.github.akosbordas.ncore;
 
 import com.github.akosbordas.ncore.authentication.CredentialsProvider;
 import com.github.akosbordas.ncore.authentication.LoginService;
-import com.github.akosbordas.ncore.search.SearchCriterion;
-import com.github.akosbordas.ncore.search.SearchInCriterion;
-import com.github.akosbordas.ncore.search.TextSearchCriterion;
-import com.github.akosbordas.ncore.search.TorrentTypeCriterion;
+import com.github.akosbordas.ncore.search.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -55,7 +52,8 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
     public List<TorrentListElement> search(String term) throws IOException {
         return search(newArrayList(
                 new TextSearchCriterion(term),
-                new SearchInCriterion(SearchInCriterion.SEARCH_IN_NAME)
+                new SearchInCriterion(SearchInCriterion.SEARCH_IN_NAME),
+                new OrderByCriterion(OrderByCriterion.ORDER_BY_UPLOAD_DATE)
         ));
     }
 
@@ -71,29 +69,23 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
 
         List<NameValuePair> searchFromList = newArrayList();
 
-        boolean torrentTypeFilterEnabled = false;
+        String selectedFilters = "";
         for (SearchCriterion searchCriterion : criteria) {
-            if (!torrentTypeFilterEnabled && searchCriterion instanceof TorrentTypeCriterion) {
-                torrentTypeFilterEnabled = true;
-            }
-
             Map<String, String> searchProperties = searchCriterion.getSearchProperties();
             for (String searchKey : searchProperties.keySet()) {
-                searchFromList.add(new BasicNameValuePair(searchKey, searchProperties.get(searchKey)));
+                if(searchCriterion instanceof TorrentTypeCriterion)
+                    selectedFilters += searchProperties.get(searchKey) + ",";
+                else
+                    searchFromList.add(new BasicNameValuePair(searchKey, searchProperties.get(searchKey)));
             }
         }
 
-        if (torrentTypeFilterEnabled) {
-            searchFromList.add(new BasicNameValuePair("tipus", "kivalasztottak_kozott"));
+        if(selectedFilters.isEmpty()) {
+            searchFromList.add(new BasicNameValuePair("tipus", "all_own"));
         } else {
-            searchFromList.add(new BasicNameValuePair("type", "all_own"));
+            searchFromList.add(new BasicNameValuePair("tipus", "kivalasztottak_kozott"));
+            searchFromList.add(new BasicNameValuePair("kivalasztott_tipus", selectedFilters));
         }
-
-        // TODO remove unnecessary parts when this method is finalized
-        searchFromList.add(new BasicNameValuePair("submit.x", "0"));
-        searchFromList.add(new BasicNameValuePair("submit.y", "0"));
-        searchFromList.add(new BasicNameValuePair("submit", "Ok"));
-        searchFromList.add(new BasicNameValuePair("tags", ""));
 
         request.setEntity(new UrlEncodedFormEntity(searchFromList));
 
@@ -128,18 +120,28 @@ public class DefaultNcoreClient extends ClientRequestBase implements NcoreClient
             criteria = newArrayList();
         }
 
-        boolean hasSearchInCriteria = false;
+        boolean hasSearchInCriterion = false;
+        boolean hasOrderByCriterion = false;
+
         for(int i = 0; i < criteria.size(); i++) {
             SearchCriterion criterion = criteria.get(i);
 
             if(criterion instanceof SearchInCriterion) {
-                if(hasSearchInCriteria) criteria.remove(i);
-                else hasSearchInCriteria = true;
+                if(hasSearchInCriterion) criteria.remove(i);
+                else hasSearchInCriterion = true;
+            }
+
+            else if(criterion instanceof OrderByCriterion) {
+                if(hasOrderByCriterion) criteria.remove(i);
+                else hasOrderByCriterion = true;
             }
         }
 
-        if(!hasSearchInCriteria)
+        if(!hasSearchInCriterion)
             criteria.add(new SearchInCriterion(SearchInCriterion.SEARCH_IN_NAME));
+
+        if(!hasOrderByCriterion)
+            criteria.add(new OrderByCriterion(OrderByCriterion.ORDER_BY_UPLOAD_DATE));
 
         criteria.add(new TextSearchCriterion(term));
         return search(criteria);
