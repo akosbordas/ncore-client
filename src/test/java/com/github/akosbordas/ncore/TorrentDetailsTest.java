@@ -51,7 +51,6 @@ public class TorrentDetailsTest extends TestBase {
         assertThat(torrentDetails.getSize()).isEqualTo("965.06 MB (1011940950 bájt)");
         assertThat(torrentDetails.getFileCount()).isEqualTo("2");
         assertThat(torrentDetails.getDescription()).isEqualTo("Eredeti release! Inception.2010.iNTERNAL.BDRip.x264-REGRET Két ifjú és ambiciózus építész együtt dolgozik, s nem csak kollégák, hanem a legjobb barátok is, ám kapcsolatukra némi árnyék vetül. A vállalatnál kifejlesztettek egy olyan technológiát, amely segítségével be lehet lépni az álmokba, és bizonyos emberek fejéből így információhoz lehet jutni. Amikor Cobb él ezzel a lehetőséggel, a dolgok egyre bonyolultabbakká válnak... Eredet (Inception) - Magyar Szinkronos Előzetes https://www.youtube.com/watch?v=Ypu8DP2ci-M");
-        assertThat(torrentDetails.isEnglish()).isTrue();
     }
 
     @Test
@@ -79,127 +78,127 @@ public class TorrentDetailsTest extends TestBase {
     @Test
     public void shouldParseSdMovieTorrentType() throws IOException {
         String html = readFile("sd-movie-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_SD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MOVIE_SD));
     }
 
     @Test
     public void shouldParseHdMovieTorrentType() throws IOException {
         String html = readFile("hd-movie-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_HD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MOVIE_HD));
     }
 
     @Test
     public void shouldParseDvdMovieTorrentType() throws IOException {
         String html = readFile("dvd-movie-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_DVD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MOVIE_DVD));
     }
 
     @Test
     public void shouldParseDvd9MovieTorrentType() throws IOException {
         String html = readFile("dvd9-movie-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MOVIE_DVD9);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MOVIE_DVD9));
     }
 
     @Test
     public void shouldParseSdSeriesTorrentType() throws IOException {
         String html = readFile("sd-series-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.SERIES_SD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.SERIES_SD));
     }
 
     @Test
     public void shouldParseHdSeriesTorrentType() throws IOException {
         String html = readFile("hd-series-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.SERIES_HD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.SERIES_HD));
     }
 
     @Test
     public void shouldParseDvdSeriesTorrentType() throws IOException {
         String html = readFile("dvd-series-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.SERIES_DVD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.SERIES_DVD));
     }
 
     @Test
     public void shouldParseMp3MusicTorrentType() throws IOException {
         String html = readFile("mp3-music-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MUSIC_MP3);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MUSIC_MP3));
     }
 
     @Test
     public void shouldParseLosslessMusicTorrentType() throws IOException {
         String html = readFile("lossless-music-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MUSIC_LOSSLESS);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MUSIC_LOSSLESS));
     }
 
     @Test
     public void shouldParseClipMusicTorrentType() throws IOException {
         String html = readFile("clip-music-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.MUSIC_CLIP);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MUSIC_CLIP));
     }
 
     @Test
     public void shouldParseEbookTorrentType() throws IOException {
         String html = readFile("ebook-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.E_BOOK);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.E_BOOK));
     }
 
     @Test
     public void shouldParseIsoGameTorrentType() throws IOException {
         String html = readFile("iso-game-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.GAME_ISO);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.GAME_ISO));
     }
 
     @Test
     public void shouldParseRipGameTorrentType() throws IOException {
         String html = readFile("rip-game-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.GAME_RIP);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.GAME_RIP));
     }
 
     @Test
     public void shouldParseConsoleGameTorrentType() throws IOException {
         String html = readFile("console-game-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.GAME_CONSOLE);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.GAME_CONSOLE));
     }
 
     @Test
     public void shouldParseSdXxxTorrentType() throws IOException {
         String html = readFile("sd-xxx-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_SD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.XXX_SD));
     }
 
     @Test
     public void shouldParseHdXxxTorrentType() throws IOException {
         String html = readFile("hd-xxx-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_HD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.XXX_HD));
     }
 
     @Test
     public void shouldParseDvdXxxTorrentType() throws IOException {
         String html = readFile("dvd-xxx-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_DVD);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.XXX_DVD));
     }
 
     @Test
     public void shouldParseImagesetXxxTorrentType() throws IOException {
         String html = readFile("imageset-xxx-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.XXX_IMAGESET);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.XXX_IMAGESET));
     }
 
     @Test
     public void shouldParseIsoProgramTorrentType() throws IOException {
         String html = readFile("iso-program-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_ISO);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.PROGRAM_ISO));
     }
 
     @Test
     public void shouldParseRipProgramTorrentType() throws IOException {
         String html = readFile("rip-program-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_RIP);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.PROGRAM_RIP));
     }
 
     @Test
     public void shouldParseMobileProgramTorrentType() throws IOException {
         String html = readFile("mobile-program-torrent-type.html");
-        assertThat(torrentDetails.parseType(html)).isSameAs(TorrentType.PROGRAM_MOBILE);
+        assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.PROGRAM_MOBILE));
     }
 
     @Test

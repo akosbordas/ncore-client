@@ -38,7 +38,7 @@ public class TorrentDetailsFactory {
 
     public TorrentDetails create(String document) {
 
-        String type = parseType(document);
+        String type = parseType(document).getSearchValue();
 
         switch (type) {
             case MOVIE_SD:
