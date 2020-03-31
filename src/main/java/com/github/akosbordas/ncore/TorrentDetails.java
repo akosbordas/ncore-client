@@ -25,6 +25,7 @@ public abstract class TorrentDetails {
     protected String size;
     protected String fileCount;
     protected String description;
+    protected boolean english;
 
     public static Document parseHtml(String html){
         return Jsoup.parse(html,"https://ncore.cc/");
@@ -35,6 +36,7 @@ public abstract class TorrentDetails {
         Document document = parseHtml(html);
 
         try {
+            english = extractGenericInfoColumn(1, 2, document).contains("EN");
             uploadDate = DATE_FORMAT.parse(extractGenericInfoColumn(1, 4, document));
             uploader = extractGenericInfoColumn(1, 6, document);
             commentCount = extractGenericInfoColumn(1, 8, document);
@@ -160,6 +162,10 @@ public abstract class TorrentDetails {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isEnglish() {
+        return english;
     }
 
     @Override

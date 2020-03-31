@@ -51,7 +51,7 @@ public class TorrentDetailsTest extends TestBase {
         assertThat(torrentDetails.getSize()).isEqualTo("965.06 MB (1011940950 bájt)");
         assertThat(torrentDetails.getFileCount()).isEqualTo("2");
         assertThat(torrentDetails.getDescription()).isEqualTo("Eredeti release! Inception.2010.iNTERNAL.BDRip.x264-REGRET Két ifjú és ambiciózus építész együtt dolgozik, s nem csak kollégák, hanem a legjobb barátok is, ám kapcsolatukra némi árnyék vetül. A vállalatnál kifejlesztettek egy olyan technológiát, amely segítségével be lehet lépni az álmokba, és bizonyos emberek fejéből így információhoz lehet jutni. Amikor Cobb él ezzel a lehetőséggel, a dolgok egyre bonyolultabbakká válnak... Eredet (Inception) - Magyar Szinkronos Előzetes https://www.youtube.com/watch?v=Ypu8DP2ci-M");
-
+        assertThat(torrentDetails.isEnglish()).isTrue();
     }
 
     @Test
