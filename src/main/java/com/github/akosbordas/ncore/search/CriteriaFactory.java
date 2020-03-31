@@ -130,4 +130,71 @@ public class CriteriaFactory {
         return new TorrentTypeCriterion(new TorrentType(XXX_HD, true));
     }
 
+    public static SearchInCriterion searchInName() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_NAME);
+    }
+
+    public static SearchInCriterion searchInDescription() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_DESCRIPTION);
+    }
+
+    public static SearchInCriterion searchInImdb() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_IMDB);
+    }
+
+    public static SearchInCriterion searchInUploader() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_UPLOADER);
+    }
+
+    public static SearchInCriterion searchInLabel() {
+        return new SearchInCriterion(SearchInCriterion.SEARCH_IN_LABEL);
+    }
+
+    public static OrderByCriterion orderByName() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_NAME, false);
+    }
+
+    public static OrderByCriterion orderByNameDesc() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_NAME, true);
+    }
+
+    public static OrderByCriterion orderByUploadDate() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_UPLOAD_DATE, false);
+    }
+
+    public static OrderByCriterion orderByUploadDateDesc() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_UPLOAD_DATE, true);
+    }
+
+    public static OrderByCriterion orderBySize() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_SIZE, false);
+    }
+
+    public static OrderByCriterion orderBySizeDesc() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_SIZE, true);
+    }
+
+    public static OrderByCriterion orderByDownloads() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_DOWNLOADS, false);
+    }
+
+    public static OrderByCriterion orderByDownloadsDesc() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_DOWNLOADS, true);
+    }
+
+    public static OrderByCriterion orderBySeeders() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_SEEDERS, false);
+    }
+
+    public static OrderByCriterion orderBySeedersDesc() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_SEEDERS, true);
+    }
+
+    public static OrderByCriterion orderByLeechers() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_LEECHERS, false);
+    }
+
+    public static OrderByCriterion orderByLeechersDesc() {
+        return new OrderByCriterion(OrderByCriterion.ORDER_BY_LEECHERS, true);
+    }
 }
