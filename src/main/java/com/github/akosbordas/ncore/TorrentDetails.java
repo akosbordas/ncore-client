@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public abstract class TorrentDetails {
@@ -175,36 +176,22 @@ public abstract class TorrentDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        TorrentDetails that = (TorrentDetails) o;
-
-        if (uploadDate != null ? !uploadDate.equals(that.uploadDate) : that.uploadDate != null) return false;
-        if (uploader != null ? !uploader.equals(that.uploader) : that.uploader != null) return false;
-        if (commentCount != null ? !commentCount.equals(that.commentCount) : that.commentCount != null) return false;
-        if (seederCount != null ? !seederCount.equals(that.seederCount) : that.seederCount != null) return false;
-        if (leecherCount != null ? !leecherCount.equals(that.leecherCount) : that.leecherCount != null) return false;
-        if (downloadCount != null ? !downloadCount.equals(that.downloadCount) : that.downloadCount != null)
-            return false;
-        if (speed != null ? !speed.equals(that.speed) : that.speed != null) return false;
-        if (size != null ? !size.equals(that.size) : that.size != null) return false;
-        if (fileCount != null ? !fileCount.equals(that.fileCount) : that.fileCount != null) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
-
+        TorrentDetails details = (TorrentDetails) o;
+        return Objects.equals(uploadDate, details.uploadDate) &&
+                Objects.equals(uploader, details.uploader) &&
+                Objects.equals(commentCount, details.commentCount) &&
+                Objects.equals(seederCount, details.seederCount) &&
+                Objects.equals(leecherCount, details.leecherCount) &&
+                Objects.equals(downloadCount, details.downloadCount) &&
+                Objects.equals(speed, details.speed) &&
+                Objects.equals(size, details.size) &&
+                Objects.equals(fileCount, details.fileCount) &&
+                Objects.equals(description, details.description) &&
+                Objects.equals(torrentType, details.torrentType);
     }
 
     @Override
     public int hashCode() {
-        int result = uploadDate != null ? uploadDate.hashCode() : 0;
-        result = 31 * result + (uploader != null ? uploader.hashCode() : 0);
-        result = 31 * result + (commentCount != null ? commentCount.hashCode() : 0);
-        result = 31 * result + (seederCount != null ? seederCount.hashCode() : 0);
-        result = 31 * result + (leecherCount != null ? leecherCount.hashCode() : 0);
-        result = 31 * result + (downloadCount != null ? downloadCount.hashCode() : 0);
-        result = 31 * result + (speed != null ? speed.hashCode() : 0);
-        result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (fileCount != null ? fileCount.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        return Objects.hash(uploadDate, uploader, commentCount, seederCount, leecherCount, downloadCount, speed, size, fileCount, description, torrentType);
     }
-
 }
