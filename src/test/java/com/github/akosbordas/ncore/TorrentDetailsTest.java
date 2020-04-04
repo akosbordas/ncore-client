@@ -72,6 +72,24 @@ public class TorrentDetailsTest extends TestBase {
     }
 
     @Test
+    public void shouldParseEnglishTorrentType() throws IOException {
+        String html = readFile("torrent-details-parse-success.html");
+        TorrentType type = TorrentDetails.parseType(html);
+        TorrentDetails details = new SdMovieTorrentDetails().parse(html, type);
+
+        assertThat(details.getTorrentType()).isEqualTo(new TorrentType(TorrentType.MOVIE_SD, true));
+    }
+
+    @Test
+    public void shouldParseHungarianTorrentType() throws IOException {
+        String html = readFile("sd-movie-torrent-details.html");
+        TorrentType type = TorrentDetails.parseType(html);
+        TorrentDetails details = new SdMovieTorrentDetails().parse(html, type);
+
+        assertThat(details.getTorrentType()).isEqualTo(new TorrentType(TorrentType.MOVIE_SD, false));
+    }
+
+    @Test
     public void shouldParseSdMovieTorrentType() throws IOException {
         String html = readFile("sd-movie-torrent-type.html");
         assertThat(torrentDetails.parseType(html)).isEqualTo(new TorrentType(TorrentType.MOVIE_SD));
