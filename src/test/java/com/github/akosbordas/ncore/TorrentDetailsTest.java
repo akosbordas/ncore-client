@@ -26,7 +26,6 @@ import java.io.IOException;
 
 import static com.github.akosbordas.ncore.TorrentDetails.DATE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class TorrentDetailsTest extends TestBase {
 
@@ -34,13 +33,13 @@ public class TorrentDetailsTest extends TestBase {
 
     @Before
     public void setUp() {
-        torrentDetails = new DefaultTorrentDetails();
+        torrentDetails = new MovieTorrentDetails();
     }
 
     @Test
     public void shouldPassIfParsedAllFields() throws Exception {
         String html = readFile("torrent-details-parse-success.html");
-        torrentDetails.parse(html);
+        torrentDetails.parse(html, new TorrentType(TorrentType.MOVIE_SD, true));
         assertThat(torrentDetails.getUploadDate()).isEqualTo(DATE_FORMAT.parse("2016-07-25 20:00:29"));
         assertThat(torrentDetails.getUploader()).isEqualTo("Anonymous");
         assertThat(torrentDetails.getCommentCount()).isEqualTo("2 db");
@@ -56,23 +55,20 @@ public class TorrentDetailsTest extends TestBase {
     @Test
     public void shouldPassIfParsedEmptyStringFromClassWithoutValue() throws IOException {
         String html = readFile("torrent-details-parse-empty-string.html");
-        torrentDetails.parse(html);
+        torrentDetails.parse(html, new TorrentType(TorrentType.MOVIE_HD, false));
         assertThat(torrentDetails.getCommentCount()).isEqualTo("");
-
     }
 
     @Test(expected = TorrentDetailsParseException.class)
     public void shouldPassIfThrowsExceptionOnParse() throws IOException {
         String html = readFile("torrent-details-parse-throw-exception.html");
-        torrentDetails.parse(html);
-
+        torrentDetails.parse(html, new TorrentType(TorrentType.MOVIE_HD, true));
     }
 
     @Test(expected = TorrentDetailsParseException.class)
     public void shouldPassIfThrowsExceptionOnTypeParse() throws IOException {
         String html = readFile("torrent-details-parse-type-throw-exception.html");
         torrentDetails.parseType(html);
-
     }
 
     @Test

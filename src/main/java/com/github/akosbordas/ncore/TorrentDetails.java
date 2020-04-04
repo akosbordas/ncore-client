@@ -32,7 +32,7 @@ public abstract class TorrentDetails {
         return Jsoup.parse(html,"https://ncore.cc/");
     }
 
-    public TorrentDetails parse(String html) {
+    public TorrentDetails parse(String html, TorrentType type) {
 
         Document document = parseHtml(html);
 
@@ -49,13 +49,13 @@ public abstract class TorrentDetails {
             fileCount = extractGenericInfoColumn(2, 14, document);
             description = document.select("div.torrent_leiras.proba42").text();
 
-            torrentType = parseType(html);
-
             customParse(document);
 
         } catch (Exception e) {
             throw new TorrentDetailsParseException(e);
         }
+
+        this.torrentType = type;
 
         return this;
     }
@@ -120,7 +120,7 @@ public abstract class TorrentDetails {
         } else if (typeString.contains("XXX") && typeString.contains("Imageset")) {
             type = new TorrentType(TorrentType.XXX_IMAGESET);
         } else {
-            throw new TorrentDetailsParseException("Couldn't parse torrent type");
+            throw new TorrentDetailsParseException("Couldn't parse torrent type from: " + html);
         }
 
         type.setEnglish(typeString.endsWith("/EN"));

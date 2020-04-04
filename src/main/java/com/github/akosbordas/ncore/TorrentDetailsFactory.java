@@ -38,57 +38,54 @@ public class TorrentDetailsFactory {
 
     public TorrentDetails create(String document) {
 
-        String type = parseType(document).getSearchValue();
+        TorrentType type = parseType(document);
 
-        switch (type) {
+        switch (type.getSearchValue()) {
             case MOVIE_SD:
-                return new SdMovieTorrentDetails().parse(document);
+                return new SdMovieTorrentDetails().parse(document, type);
             case MOVIE_HD:
-                return new HdMovieTorrentDetails().parse(document);
+                return new HdMovieTorrentDetails().parse(document, type);
             case MOVIE_DVD:
-                return new DvdMovieTorrentDetails().parse(document);
+                return new DvdMovieTorrentDetails().parse(document, type);
             case MOVIE_DVD9:
-                return new Dvd9MovieTorrentDetails().parse(document);
+                return new Dvd9MovieTorrentDetails().parse(document, type);
             case SERIES_SD:
-                return new SdSeriesTorrentDetails().parse(document);
+                return new SdSeriesTorrentDetails().parse(document, type);
             case SERIES_HD:
-                return new HdSeriesTorrentDetails().parse(document);
+                return new HdSeriesTorrentDetails().parse(document, type);
             case SERIES_DVD:
-                return new DvdSeriesTorrentDetails().parse(document);
+                return new DvdSeriesTorrentDetails().parse(document, type);
             case MUSIC_MP3:
-                return new Mp3MusicTorrentDetails().parse(document);
+                return new Mp3MusicTorrentDetails().parse(document, type);
             case MUSIC_LOSSLESS:
-                return new LosslessMusicTorrentDetails().parse(document);
+                return new LosslessMusicTorrentDetails().parse(document, type);
             case MUSIC_CLIP:
-                return new ClipMusicTorrentDetails().parse(document);
+                return new ClipMusicTorrentDetails().parse(document, type);
             case GAME_ISO:
-                return new IsoGameTorrentDetails().parse(document);
+                return new IsoGameTorrentDetails().parse(document, type);
             case GAME_RIP:
-                return new RipGameTorrentDetails().parse(document);
+                return new RipGameTorrentDetails().parse(document, type);
             case GAME_CONSOLE:
-                return new ConsoleGameTorrentDetails().parse(document);
+                return new ConsoleGameTorrentDetails().parse(document, type);
             case E_BOOK:
-                return new EbookTorrentDetails().parse(document);
+                return new EbookTorrentDetails().parse(document, type);
             case PROGRAM_ISO:
-                return new IsoProgramTorrentDetails().parse(document);
+                return new IsoProgramTorrentDetails().parse(document, type);
             case PROGRAM_RIP:
-                return new RipProgramTorrentDetails().parse(document);
+                return new RipProgramTorrentDetails().parse(document, type);
             case PROGRAM_MOBILE:
-                return new MobileProgramTorrentDetails().parse(document);
+                return new MobileProgramTorrentDetails().parse(document, type);
             case XXX_SD:
-                return new SdXxxTorrentDetails().parse(document);
+                return new SdXxxTorrentDetails().parse(document, type);
             case XXX_DVD:
-                return new DvdXxxTorrentDetails().parse(document);
+                return new DvdXxxTorrentDetails().parse(document, type);
             case XXX_IMAGESET:
-                return new ImagesetXxxTorrentDetails().parse(document);
+                return new ImagesetXxxTorrentDetails().parse(document, type);
             case XXX_HD:
-                return new HdXxxTorrentDetails().parse(document);
-            default:
-                return new DefaultTorrentDetails().parse(document);
-
+                return new HdXxxTorrentDetails().parse(document, type);
         }
 
-
+        return null;
     }
 
 
